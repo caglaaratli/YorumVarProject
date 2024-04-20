@@ -5,8 +5,16 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-const app = express();
+const signupRouter = require('./register');
+const loginRouter = require('./login');
 
+// /signup endpoint'i için signupRouter'ı kullan
+app.use(signupRouter);
+// /login endpoint'i için loginRouter'ı kullan
+app.use(loginRouter);
+
+
+const app = express();
 app.use(cors());
 app.use(express.json()); // JSON istekleri için body-parser olarak hizmet eder.
 
@@ -32,7 +40,7 @@ db.connect(err => {
 });
 
 
-app.post('/login', (req, res) => {
+/*app.post('/login', (req, res) => {
   const { email, password } = req.body;
   // Email adresine göre kullanıcıyı bul
   const query = 'SELECT * FROM users WHERE mail = ?';
@@ -62,8 +70,8 @@ app.post('/login', (req, res) => {
   });
 });
 
-
-// POST endpoint
+*/
+/*  // POST endpoint
 app.post('/register', (req, res) => {
   const { firstName, lastName, phone, email, password } = req.body;
   // Şifreyi hashle
@@ -80,31 +88,6 @@ app.post('/register', (req, res) => {
       });
   });
 });
-  
+  */
  
   
-  /*
-  // Kullanıcı giriş endpoint'i
-  app.post('/login', (req, res) => {
-    const { username, password } = req.body;
-    if (!(username && password)) {
-      return res.status(400).send("Kullanıcı adı ve şifre gerekli.");
-    }
-  
-    db.query('SELECT * FROM users WHERE username = ?', [username], async (err, results) => {
-      if (err) throw err;
-      if (results.length > 0) {
-        const comparison = await bcrypt.compare(password, results[0].password);
-        if (comparison) {
-          const token = jwt.sign({ userId: results[0].id }, process.env.SECRET, { expiresIn: '1h' });
-          res.status(200).json({ token });
-        } else {
-          res.status(401).send("Şifre yanlış.");
-        }
-      } else {
-        res.status(404).send("Kullanıcı bulunamadı.");
-      }
-    });
-  });
-  
-*/
