@@ -5,13 +5,24 @@ import useForm from "../hooks/useForm";
 import { registerUser } from "../services/api";
 
 function SignUp() {
-  const { values, errors, handleChange, validate } = useForm({
-    firstName: "",
-    lastName: "",
-    phone: "",
-    email: "",
-    password: "",
-  });
+  const validateSchema = {
+    firstName: { required: true, name: "First Name" },
+    lastName: { required: true, name: "Last Name" },
+    phone: { required: true, name: "Phone Number" },
+    email: { required: true, name: "Email" },
+    password: { required: true, name: "Password" },
+  };
+
+  const { values, errors, handleChange, validate } = useForm(
+    {
+      firstName: "",
+      lastName: "",
+      phone: "",
+      email: "",
+      password: "",
+    },
+    validateSchema
+  ); // valid
   const [message, setMessage] = useState(null);
 
   const handleSubmit = async (event) => {
