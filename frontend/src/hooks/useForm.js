@@ -14,23 +14,27 @@ const useForm = (initialValues, validateSchema) => {
   };
 
   const validateField = (name, value) => {
-    let error = '';
-    if (validateSchema[name].required && !value.trim()) {
-      error = `${validateSchema[name].name} is required`;
-    }
-    setErrors({ ...errors, [name]: error });
+    setErrors((currentErrors) => {
+      let error = '';
+      if (validateSchema[name].required && value && !value.trim()) {
+        error = `${validateSchema[name].name} is required`;
+      }
+      return { ...currentErrors, [name]: error };
+    });
   };
 
   const validate = () => {
-    let newErrors = {};
-    Object.keys(validateSchema).forEach(key => {
-      if (validateSchema[key].required && !values[key].trim()) {
-        newErrors[key] = `${validateSchema[key].name} is required`;
+    let isValid = true;
+    const newErrors = Object.keys(validateSchema).reduce((acc, key) => {
+      if (validateSchema[key].required && (!values[key] || !values[key].trim())) {
+        acc[key] = `${validateSchema[key].name} is required`;
+        isValid = false;
       }
-    });
+      return acc;
+    }, {});
 
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0; // No errors if true
+    return isValid; // True if there are no errors
   };
 
   return { values, errors, handleChange, setErrors, validate };
