@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
+const app = express();
 const signupRouter = require('./register');
 const loginRouter = require('./login');
 
@@ -13,10 +14,6 @@ app.use(signupRouter);
 // /login endpoint'i için loginRouter'ı kullan
 app.use(loginRouter);
 
-
-const app = express();
-app.use(cors());
-app.use(express.json()); // JSON istekleri için body-parser olarak hizmet eder.
 
 // MySQL bağlantısını ayarlayın
 const db = mysql.createConnection({
@@ -40,54 +37,5 @@ db.connect(err => {
 });
 
 
-/*app.post('/login', (req, res) => {
-  const { email, password } = req.body;
-  // Email adresine göre kullanıcıyı bul
-  const query = 'SELECT * FROM users WHERE mail = ?';
-  db.query(query, [email], (err, results) => {
-    if (err) {
-      return res.status(500).send(err);
-    }
-    if (results.length > 0) {
-      // Kullanıcı bulundu, şifreyi karşılaştır
-      const user = results[0];
-      bcrypt.compare(password, user.password, (err, isMatch) => {
-        if (err) {
-          return res.status(500).send(err);
-        }
-        if (isMatch) {
-          // Şifre eşleşiyor, 
-          res.status(200).json({ message: 'Login successful'});
-        } else {
-          // Şifre eşleşmiyor
-          res.status(401).json({ message: 'Password is incorrect' });
-        }
-      });
-    } else {
-      // Kullanıcı bulunamadı
-      res.status(404).json({ message: 'User not found' });
-    }
-  });
-});
-
-*/
-/*  // POST endpoint
-app.post('/register', (req, res) => {
-  const { firstName, lastName, phone, email, password } = req.body;
-  // Şifreyi hashle
-  bcrypt.hash(password, 10, (err, hashedPassword) => {
-      if (err) {
-          return res.status(500).send(err);
-      }
-      const query = 'INSERT INTO users (name, surname, phone, mail, password) VALUES (?, ?, ?, ?, ?)';
-      db.query(query, [firstName, lastName, phone, email, hashedPassword], (err, results) => {
-          if (err) {
-              return res.status(500).send(err);
-          }
-          res.status(200).send('User registered successfully');
-      });
-  });
-});
-  */
  
   
