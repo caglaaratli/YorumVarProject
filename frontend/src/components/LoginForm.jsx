@@ -1,32 +1,25 @@
-
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { HiOutlineMail } from "react-icons/hi";
 import { RiLockPasswordLine } from "react-icons/ri";
 import useForm from "../hooks/useForm";
 
-function LoginForm({ onLogin, onLoginError, setMessage }) {
+function LoginForm({ onLogin }) {
   const { values, errors, handleChange, validate } = useForm(
     {
       email: "",
       password: "",
     },
     {
-      email: { required: true, name: "Email" },
-      password: { required: true, name: "Password" },
+      email: { required: true, name: "E-posta" },
+      password: { required: true, name: "Şifre" },
     }
   );
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!validate()) return;
+    if (!validate()) return; // Doğrulama başarısız ise hiçbir şey yapma.
 
-    try {
-      await onLogin(values);
-      setMessage("Login successful!");
-      setTimeout(() => setMessage(null), 3000);
-    } catch (error) {
-      onLoginError(error);
-    }
+    onLogin(values); // Doğrulama başarılı ise üst bileşene değerleri gönder.
   };
 
   return (
@@ -34,9 +27,7 @@ function LoginForm({ onLogin, onLoginError, setMessage }) {
       <div className="mt-5">
         <label htmlFor="email" className="flex items-center space-x-2">
           <HiOutlineMail className="w-5 h-5 text-gray-500" />
-          <span className="block text-sm font-medium text-gray-700">
-            Email
-          </span>
+          <span className="block text-sm font-medium text-gray-700">Email</span>
         </label>
         <div className="mt-2 flex rounded-md shadow-sm">
           <input
@@ -87,8 +78,6 @@ function LoginForm({ onLogin, onLoginError, setMessage }) {
 
 LoginForm.propTypes = {
   onLogin: PropTypes.func.isRequired,
-  onLoginError: PropTypes.func.isRequired,
-  setMessage: PropTypes.func.isRequired
 };
 
 export default LoginForm;

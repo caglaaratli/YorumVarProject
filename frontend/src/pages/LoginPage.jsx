@@ -6,25 +6,17 @@ function Login() {
   const [message, setMessage] = useState(null);
 
   const handleLogin = async (values) => {
-    await loginUser(values);
-  };
-
-  const handleLoginError = (error) => {
-    if (error.response) {
-      switch (error.response.status) {
-        case 401:
-          setMessage("User information is incorrect. please check.");
-          break;
-        case 404:
-          setMessage("User not found.");
-          break;
-        default:
-          setMessage("Login failed. Please try again later.");
+    try {
+      const response = await loginUser(values); // loginUser API çağrısını düzgün bir şekilde yapmalı.
+      setMessage(response.data.message); // API'den dönen başarı mesajını ayarla.
+      setTimeout(() => setMessage(null), 4000); // Mesajı 3 saniye sonra kaldır.
+    } catch (error) {
+      if (error.response) {
+        setMessage(error.response.data.message); // API'den dönen hata mesajını ayarla.
+      } else {
+        setMessage("Login failed.Please try again later."); // Genel hata mesajı.
       }
-    } else {
-      setMessage("Login failed. Please try again later.");
     }
-    console.error("Login failed:", error);
   };
 
   return (
@@ -38,11 +30,14 @@ function Login() {
             {message}
           </div>
         )}
-        <LoginForm onLogin={handleLogin} onLoginError={handleLoginError} setMessage={setMessage} />
+        <LoginForm onLogin={handleLogin} />
         <div className="mt-5 text-center">
           <p className="text-gray-600">
             Dont have an account?
-            <a href="/register" className="text-indigo-500 hover:text-indigo-500 ml-2">
+            <a
+              href="/register"
+              className="text-indigo-500 hover:text-indigo-500 ml-2"
+            >
               Sign up
             </a>
           </p>

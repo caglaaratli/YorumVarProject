@@ -30,51 +30,57 @@ db.connect((err) => {
   console.log("mysql bağlantısı okey");
 });
 
-
-app.post('/register', (req, res) => {
+app.post("/register", (req, res) => {
   const { firstName, lastName, phone, email, password } = req.body;
   // Şifreyi hashle
   bcrypt.hash(password, 10, (err, hashedPassword) => {
-      if (err) {
-          return res.status(500).send(err);
-      }
-      const query = 'INSERT INTO users (name, surname, phone, mail, password) VALUES (?, ?, ?, ?, ?)';
-      db.query(query, [firstName, lastName, phone, email, hashedPassword], (err, results) => {
-          if (err) {
-              return res.status(500).send(err);
-          }
-          res.status(200).send('User registered successfully');
-      });
-  });
-});
-
-
-app.post('/login', (req, res) => {
-  const { email, password } = req.body;
-  // Email adresine göre kullanıcıyı bul
-  const query = 'SELECT * FROM users WHERE mail = ?';
-  db.query(query, [email], (err, results) => {
     if (err) {
       return res.status(500).send(err);
     }
-    if (results.length > 0) {
-      // Kullanıcı bulundu, şifreyi karşılaştır
-      const user = results[0];
-      bcrypt.compare(password, user.password, (err, isMatch) => {
+    const query =
+      "INSERT INTO users (name, surname, phone, mail, password) VALUES (?, ?, ?, ?, ?)";
+    db.query(
+      query,
+      [firstName, lastName, phone, email, hashedPassword],
+      (err, results) => {
         if (err) {
           return res.status(500).send(err);
         }
+        res.status(200).send("User registered successfully");
+      }
+    );
+  });
+});
+
+// Express.js ile oluşturulmuş login endpoint
+app.post("/login", (req, res) => {
+  const { email, password } = req.body;
+  const query = "SELECT * FROM users WHERE mail = ?";
+  db.query(query, [email], (err, results) => {
+    if (err) {
+      // Veritabanı sorgu hatası
+      return res.status(500).json({ message: "Internal server error" });
+    }
+    if (results.length > 0) {
+      const user = results[0];
+      bcrypt.compare(password, user.password, (err, isMatch) => {
+        if (err) {
+          // BCrypt hatası
+          return res.status(500).json({ message: "Internal server error" });
+        }
         if (isMatch) {
-          // Şifre eşleşiyor, 
-          res.status(200).json({ message: 'Login successful'});
+          // Başarılı giriş
+          res.status(200).json({ message: "Login successful" });
+         
         } else {
-          // Şifre eşleşmiyor
-          res.status(401).json({ message: 'Password is incorrect' });
+          // Şifre yanlış
+          res.status(401).json({ message: "Password is incorrect" });
+         
         }
       });
     } else {
       // Kullanıcı bulunamadı
-      res.status(404).json({ message: 'User not found' });
+      res.status(404).json({ message: "User not found" });
     }
   });
 });
