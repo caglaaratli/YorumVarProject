@@ -1,4 +1,4 @@
-import Header from "./Header"; // Varsayılan olarak Header componentini import et
+import Header from "../components/Header"; // Varsayılan olarak Header componentini import et
 
 function HomePage() {
   return (

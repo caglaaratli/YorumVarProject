@@ -1,10 +1,10 @@
-import { useState } from "react";
+
 import { HiOutlineUser, HiOutlineMail, HiOutlinePhone } from "react-icons/hi";
 import { RiLockPasswordLine } from "react-icons/ri";
 import useForm from "../hooks/useForm";
-import { registerUser } from "../services/api";
+import PropTypes from 'prop-types';
 
-function SignUp() {
+function SignUpForm({ onSubmit, setMessage }) {
   const validateSchema = {
     firstName: { required: true, name: "First Name" },
     lastName: { required: true, name: "Last Name" },
@@ -22,36 +22,24 @@ function SignUp() {
       password: "",
     },
     validateSchema
-  ); // valid
-  const [message, setMessage] = useState(null);
+  );
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!validate()) return;
-
+    if (!validate()) {
+      setMessage("Validation failed, please check your entries."); // Burada bir hata mesajı ayarlayabilirsiniz.
+      return;
+    }
     try {
-      await registerUser(values);
-      setMessage("Registration successful!");
-      setTimeout(() => setMessage(null), 4000);
+      await onSubmit(values);
     } catch (error) {
-      console.error("Registration failed:", error);
-      setMessage("Registration failed. Please try again later.");
+      console.error("Submission failed:", error);
+      setMessage("Registration failed. Please try again later."); // Burada bir hata mesajı ayarlayabilirsiniz.
     }
   };
 
-
   return (
-    <div className="flex items-center justify-center min-h-screen bg-blue-200">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-md shadow-lg">
-        <h1 className="text-2xl font-bold text-center italic text-gray-600">
-          Sign Up
-        </h1>
-        {message && (
-          <div className="text-center p-3 mb-2 bg-green-100 border border-green-400 text-green-700">
-            {message}
-          </div>
-        )}
-        <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
           <div className="mt-4">
             <label
               htmlFor="firstName"
@@ -200,9 +188,14 @@ function SignUp() {
             </button>
           </div>
         </form>
-      </div>
-    </div>
   );
 }
 
-export default SignUp;
+
+
+SignUpForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  setMessage: PropTypes.func.isRequired
+};
+
+export default SignUpForm;
