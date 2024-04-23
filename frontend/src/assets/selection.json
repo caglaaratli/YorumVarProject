@@ -1,0 +1,35 @@
+{
+  "generatorSource": "svgps.app",
+  "IcoMoonType": "selection",
+  "icons": [
+    {
+      "id": 56156,
+      "iconSetName": "feather",
+      "name": "search",
+      "icon": {
+        "paths": [
+          "M469.3 469.3m-341.3 0a341.3 341.3 0 1 0 682.7 0 341.3 341.3 0 1 0-682.7 0",
+          "M896 896L710.4 710.4"
+        ],
+        "attrs": [
+          {
+            "fill": "none",
+            "stroke" : "blue",
+            "strokeWidth": 85,
+            "strokeLinejoin": "round",
+            "strokeLinecap": "round"
+          },
+          {
+            "fill": "none",
+            "stroke" : "blue",
+            "strokeWidth": 85,
+            "strokeLinejoin": "round",
+            "strokeLinecap": "round"
+          }
+        ],
+        "width": 1024
+      },
+      "properties": { "name": "search", "iconSetName": "feather" }
+    }
+  ]
+}
