@@ -5,8 +5,8 @@ const db = require("./db");
 const router = express.Router();
 
 router.post("/", async (req, res) => {
-  const { firstName, lastName, phone, email, password } = req.body;
-  
+  const { firstName, lastName, usernameInput, phone, email, password } = req.body;
+
   // E-posta adresinin veritabanında mevcut olup olmadığını kontrol et
   try {
     const existingUser = await getUserByEmail(email);
@@ -23,13 +23,13 @@ router.post("/", async (req, res) => {
       return res.status(500).send(err);
     }
     const query =
-      "INSERT INTO users (name, surname, phone, mail, password) VALUES (?, ?, ?, ?, ?)";
+      "INSERT INTO users (name, surname,username, phone, mail, password ) VALUES (?, ?, ?, ?, ?, ?)";
     db.query(
       query,
-      [firstName, lastName, phone, email, hashedPassword],
+      [firstName, lastName, usernameInput, phone, email, hashedPassword ],
       (err, results) => {
         if (err) {
-          return res.status(200).send(err);
+          return res.status(500).send(err);
         }
         res.status(200).send("User registered successfully");
       }
@@ -45,7 +45,7 @@ async function getUserByEmail(email) {
       if (err) {
         return reject(err);
       }
-      resolve(results[0]); 
+      resolve(results[0]);
     });
   });
 }
