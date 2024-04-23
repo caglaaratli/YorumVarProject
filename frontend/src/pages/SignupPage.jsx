@@ -1,21 +1,51 @@
 import { useState } from "react";
 import SignUpForm from "../components/SignUpForm";
 import { registerUser } from "../services/api";
+import { useDispatch } from 'react-redux';
+
 
 function SignUp() {
+  const dispatch = useDispatch();
   const [message, setMessage] = useState(null);
 
   const handleRegistration = async (values) => {
-    try {
-      await registerUser(values);
-      setMessage("Registration successful!");
-      setTimeout(() => setMessage(null), 4000); // Başarılı kayıt mesajını 4 saniye sonra silecek.
-    } catch (error) {
-      console.error("Registration failed:", error);
-      setMessage("Registration failed. Please try again later."); // Hata durumunda kullanıcıya bilgi vermek.
-      setTimeout(() => setMessage(null), 4000); // Hata mesajını 4 saniye sonra silecek.
-    }
+    let temp_values = values;
+    const income = await registerUser(values);
+
+    if(income.status == 200){
+      console.log(income.data);
+      if(income.data == 'Email is already in use'){
+        setMessage(income.data); 
+      }
+
+      if(income.data == 'User registered successfully'){
+        setMessage(income.data);  
+   
+        dispatch({ type: 'LOGIN_SUCCESS', payload: [ temp_values.email , temp_values.name ] });
+        window.location.href = "/profile";
+      }
+    }else if(income.status == 500){
+
+      setMessage("Registration failed. Please try again later.");  
+
+    }  
+
+
+    // try {
+    //   await registerUser(values);
+    //   setMessage("Registration successful!");
+    //   setTimeout(() => setMessage(null), 4000); // Başarılı kayıt mesajını 4 saniye sonra silecek.
+    // } catch (error) {
+    //   console.error("Registration failed:", error);
+    //   if (error.response && error.response.status === 400 && error.response.data === "Email is already in use") {
+    //     setMessage("This email is already in use. Please use a different one.");
+    //   } else {
+    //     setMessage("Registration failed. Please try again later."); // Diğer hata durumlarında kullanıcıya genel bir hata mesajı gönder.
+    //   }
+    //   setTimeout(() => setMessage(null), 4000); // Hata mesajını 4 saniye sonra silecek.
+    // }
   };
+  
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-blue-200">
