@@ -1,20 +1,25 @@
 import LoginForm from "../components/LoginForm";
 import { loginUser } from "../services/api";
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [message, setMessage] = useState(null);
+  const navigate = useNavigate();
 
   const handleLogin = async (values) => {
     try {
-      const response = await loginUser(values); // loginUser API çağrısını düzgün bir şekilde yapmalı.
-      setMessage(response.data.message); // API'den dönen başarı mesajını ayarla.
-      setTimeout(() => setMessage(null), 4000); // Mesajı 3 saniye sonra kaldır.
+      const response = await loginUser(values);
+      localStorage.setItem('token', response.data.token); // Token'ı localStorage'a kaydet
+      localStorage.setItem('user', JSON.stringify({ userId: response.data.userId, email: response.data.email, name: response.data.name })); // Kullanıcı bilgilerini localStorage'a kaydet
+      setMessage(response.data.message);
+      setTimeout(() => setMessage(null), 4000);
+      navigate('/profile');
     } catch (error) {
       if (error.response) {
-        setMessage(error.response.data.message); // API'den dönen hata mesajını ayarla.
+        setMessage(error.response.data.message);
       } else {
-        setMessage("Login failed.Please try again later."); // Genel hata mesajı.
+        setMessage("Login failed. Please try again later.");
       }
     }
   };

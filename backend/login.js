@@ -1,7 +1,8 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const db = require("./db");
-
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 const router = express.Router();
 
 router.post("/", (req, res) => {
@@ -21,7 +22,10 @@ router.post("/", (req, res) => {
         }
         if (isMatch) {
           // Başarılı giriş
-          res.status(200).json({ message: "Login successful" });
+          const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
+            expiresIn: "4h",
+          });
+          res.status(200).json({ token: token, userId: user.id, email: user.email, name: user.name }); // Token ve kullanıcı bilgilerini gönder
         } else {
           // Şifre yanlış
           res.status(401).json({ message: "Password is incorrect" });
