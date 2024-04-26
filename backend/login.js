@@ -22,7 +22,7 @@ router.post("/", (req, res) => {
         }
         if (isMatch) {
           // Başarılı giriş
-          const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
+          const token = jwt.sign({ userId: user.id  , username: user.username  }, process.env.JWT_SECRET, {
             expiresIn: "4h",
           });
           res.status(200).json({ token: token, userId: user.id, email: user.email, name: user.name }); // Token ve kullanıcı bilgilerini gönder

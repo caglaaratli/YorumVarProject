@@ -2,6 +2,7 @@ import  { useEffect, useState } from 'react';
 import { getUserProfile } from '../services/api';
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
+import NewReview from './NewReview';
 
 function Profile() {
   const [user, setUser] = useState(null);
@@ -34,8 +35,8 @@ function Profile() {
         );
       case 'reviews':
         return <p>Değerlendirmelerim</p>;
-      case 'new-review':
-        return <p>Yeni Değerlendirme</p>;
+      case 'add-review':
+        return <NewReview />;
       case 'account-settings':
         return <p>Account Settings</p>;
       default:

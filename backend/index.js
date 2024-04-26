@@ -3,6 +3,7 @@ const cors = require("cors");
 const registerRouter = require("./register");
 const loginRouter = require("./login");
 const profileRouter = require("./profile");
+const addreviewRouter = require("./new-review");
 const db = require("./db");
 const cookieParser = require('cookie-parser'); 
 require("dotenv").config();
@@ -22,6 +23,7 @@ app.use(cookieParser());
 app.use("/register", registerRouter);
 app.use("/login", loginRouter);
 app.use("/profile", profileRouter);
+app.use("/new-review", addreviewRouter)
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
