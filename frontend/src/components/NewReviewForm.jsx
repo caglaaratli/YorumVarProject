@@ -126,7 +126,7 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
             className="form-group"
             style={{ display: "flex", alignItems: "center" }}
           >
-            <label htmlFor="kargo_paket_puani" style={{ flex: "1" }}>
+            <label htmlFor="kargo_paket_puani" style={{ flex: "2" }}>
               Kargo Paket Puanı:
             </label>
             <div style={{ flex: "2", display: "flex" }}>
@@ -139,7 +139,7 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
             className="form-group"
             style={{ display: "flex", alignItems: "center" }}
           >
-            <label htmlFor="teslimat_puani" style={{ flex: "1" }}>
+            <label htmlFor="teslimat_puani" style={{ flex: "2" }}>
               Teslimat Puanı:
             </label>
             <div style={{ flex: "2", display: "flex" }}>
@@ -152,7 +152,7 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
             className="form-group"
             style={{ display: "flex", alignItems: "center" }}
           >
-            <label htmlFor="fiyat_puani" style={{ flex: "1" }}>
+            <label htmlFor="fiyat_puani" style={{ flex: "2" }}>
               Fiyat Puanı:
             </label>
             <div style={{ flex: "2", display: "flex" }}>
@@ -165,7 +165,7 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
             className="form-group"
             style={{ display: "flex", alignItems: "center" }}
           >
-            <label htmlFor="urun_kalite_puani" style={{ flex: "1" }}>
+            <label htmlFor="urun_kalite_puani" style={{ flex: "2" }}>
               Ürün Kalite Puanı:
             </label>
             <div style={{ flex: "2", display: "flex" }}>
@@ -178,7 +178,7 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
             className="form-group"
             style={{ display: "flex", alignItems: "center" }}
           >
-            <label htmlFor="musteri_hizmetleri_puani" style={{ flex: "1" }}>
+            <label htmlFor="musteri_hizmetleri_puani" style={{ flex: "2" }}>
               Müşteri Hizmetleri Puanı:
             </label>
             <div style={{ flex: "2", display: "flex" }}>
@@ -191,7 +191,7 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
             className="form-group"
             style={{ display: "flex", alignItems: "center" }}
           >
-            <label htmlFor="urun_orj" style={{ flex: "1" }}>
+            <label htmlFor="urun_orj" style={{ flex: "2" }}>
               Ürün Orijinalliği:
             </label>
             <div style={{ flex: "2", display: "flex", alignItems: "center" }}>

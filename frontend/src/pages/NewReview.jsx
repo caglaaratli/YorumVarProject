@@ -3,7 +3,7 @@ import NewReviewForm from '../components/NewReviewForm';
 import { postReview } from '../services/api';
 
 function NewReviewPage() {
-  const [review, setReview] = useState({
+  const initialReviewState = {
     urun_adi: "",
     site_adi: "",
     satici_isim: "",
@@ -15,17 +15,37 @@ function NewReviewPage() {
     musteri_hizmetleri_puani: "",
     urun_orj: "",
     yorum: "",
-  });
+  };
+
+  const [review, setReview] = useState(initialReviewState);
+  const [message, setMessage] = useState(null);
+
 
   const handleChange = (e) => {
     setReview({ ...review, [e.target.name]: e.target.value });
   };
 
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     const user = JSON.parse(localStorage.getItem("user"));
     const { user_id, username } = user;
-    await postReview({ ...review, user_id, username });
+    try {
+      const response = await postReview({ ...review, user_id, username });
+      if (response.data.message === "Review added successfully") {
+        setMessage(response.data.message);
+        setReview(initialReviewState); // Formu başlangıç durumuna sıfırla
+        setTimeout(() => setMessage(null), 4000);
+      } else {
+        setMessage(response.data.message);
+      }
+    } catch (error) {
+      if (error.response) {
+        setMessage(error.response.data.message);
+      } else {
+        setMessage("İnceleme gönderimi başarısız oldu. Lütfen daha sonra tekrar deneyin.");
+      }
+    }
   };
 
   const renderStars = (category) => {
@@ -52,12 +72,19 @@ function NewReviewPage() {
   };
 
   return (
-    <NewReviewForm
-      review={review}
-      handleChange={handleChange}
-      handleSubmit={handleSubmit}
-      renderStars={renderStars}
-    />
+   <div>
+      {message && (
+        <div className="text-center p-3 mb-2 bg-green-100 border border-green-400 text-green-700">
+          {message}
+        </div>
+      )}
+      <NewReviewForm
+        review={review}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        renderStars={renderStars}
+      />
+    </div>
   );
 }
 
