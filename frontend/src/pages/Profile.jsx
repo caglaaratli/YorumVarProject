@@ -1,40 +1,20 @@
-import  { useEffect, useState } from 'react';
-import { getUserProfile } from '../services/api';
+import { useState } from 'react';
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import NewReview from './NewReview';
+import AccountPage from './AccountPage';
 
 function Profile() {
-  const [user, setUser] = useState(null);
-  const [content, setContent] = useState('account'); // İçerik yönetimi için state
+ 
+  const [content, setContent] = useState('account'); 
 
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const response = await getUserProfile();
-        setUser(response.data);
-      } catch (error) {
-        console.error('Profile fetch failed:', error);
-      }
-    };
-
-    fetchProfile();
-  }, []);
-
+ 
   const renderContent = () => {
     switch (content) {
       case 'account':
-        return user ? (
-          <div className="text-center">
-            <p className="text-4xl font-bold text-gray-800 mb-6">{user.name}</p>
-            <p>ID: {user.id}</p>
-            <p>Kullanıcı Adı: {user.username}</p>
-          </div>
-        ) : (
-          <p>Yükleniyor...</p>
-        );
-      case 'reviews':
-        return <p>Değerlendirmelerim</p>;
+        return <AccountPage />;
+      case 'all-reviews':
+        return <p>My Reviews</p>;
       case 'add-review':
         return <NewReview />;
       case 'account-settings':

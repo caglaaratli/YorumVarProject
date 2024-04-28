@@ -34,3 +34,13 @@ export const postReview = async (reviewData) => {
     }
   });
 };
+
+
+export const getUserReviewCount = async () => {
+  const token = localStorage.getItem('token');
+  return axios.get("http://localhost:3001/review-count", {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+};

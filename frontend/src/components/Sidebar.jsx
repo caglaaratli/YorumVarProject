@@ -33,7 +33,7 @@ function Sidebar({ setContent }) {
         <button onClick={() => setContent('account')} className="w-full p-2 bg-indigo-500 text-white rounded hover:bg-indigo-600">
           My Account
         </button>
-        <button onClick={() => setContent('reviews')} className="w-full p-2 bg-indigo-500 text-white rounded hover:bg-indigo-600">
+        <button onClick={() => setContent('all-reviews')} className="w-full p-2 bg-indigo-500 text-white rounded hover:bg-indigo-600">
           My Reviews
         </button>
         <button onClick={() => setContent('add-review')} className="w-full p-2 bg-indigo-500 text-white rounded hover:bg-indigo-600">
@@ -46,7 +46,7 @@ function Sidebar({ setContent }) {
           localStorage.clear();
           window.location.href = '/';
         }} className="w-full p-2 bg-red-500 text-white rounded hover:bg-red-600">
-          Çıkış Yap
+          Log Out
         </button>
       </div>
     </div>
