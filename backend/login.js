@@ -22,10 +22,28 @@ router.post("/", (req, res) => {
         }
         if (isMatch) {
           // Başarılı giriş
-          const token = jwt.sign({ userId: user.id  ,username : user.username, name : user.name , surname : user.surname , email:user.mail , phoneNumber:user.phone  }, process.env.JWT_SECRET, {
-            expiresIn: "4h",
-          });
-          res.status(200).json({ token: token, userId: user.id, email: user.mail, name: user.name }); // Token ve kullanıcı bilgilerini gönder
+          const token = jwt.sign(
+            {
+              userId: user.id,
+              username: user.username,
+              name: user.name,
+              surname: user.surname,
+              email: user.mail,
+              phoneNumber: user.phone,
+            },
+            process.env.JWT_SECRET,
+            {
+              expiresIn: "4h",
+            }
+          );
+          res
+            .status(200)
+            .json({
+              token: token,
+              userId: user.id,
+              email: user.mail,
+              name: user.name,
+            }); // Token ve kullanıcı bilgilerini gönder
         } else {
           // Şifre yanlış
           res.status(401).json({ message: "Password is incorrect" });

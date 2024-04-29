@@ -55,7 +55,7 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
             style={{ display: "flex", alignItems: "center" }}
           >
             <label htmlFor="site_adi" style={{ flex: "1" }}>
-               Site :
+              Site :
             </label>
             <input
               id="site_adi"
@@ -117,7 +117,6 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
             />
           </div>
 
-
           <div
             className="form-group"
             style={{ display: "flex", alignItems: "center" }}
@@ -147,7 +146,7 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
             style={{ display: "flex", alignItems: "center" }}
           >
             <label htmlFor="fiyat_puani" style={{ flex: "2" }}>
-            Price Performance score:
+              Price Performance score:
             </label>
             <div style={{ flex: "2", display: "flex" }}>
               {renderStars("fiyat_puani")}
@@ -159,14 +158,13 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
             style={{ display: "flex", alignItems: "center" }}
           >
             <label htmlFor="urun_kalite_puani" style={{ flex: "2" }}>
-            Product Quality Score:
+              Product Quality Score:
             </label>
             <div style={{ flex: "2", display: "flex" }}>
               {renderStars("urun_kalite_puani")}
             </div>
           </div>
 
-    
           <div
             className="form-group"
             style={{ display: "flex", alignItems: "center" }}

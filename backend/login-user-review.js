@@ -6,9 +6,9 @@ const jwt = require("jsonwebtoken");
 
 // JWT token'ı doğrulama middleware'ı
 const verifyToken = (req, res, next) => {
-  const bearerHeader = req.headers['authorization'];
-  if (typeof bearerHeader !== 'undefined') {
-    const bearer = bearerHeader.split(' ');
+  const bearerHeader = req.headers["authorization"];
+  if (typeof bearerHeader !== "undefined") {
+    const bearer = bearerHeader.split(" ");
     const bearerToken = bearer[1];
     jwt.verify(bearerToken, process.env.JWT_SECRET, (err, authData) => {
       if (err) {
@@ -26,10 +26,10 @@ const verifyToken = (req, res, next) => {
 router.get("/", verifyToken, (req, res) => {
   const user_id = req.user.userId; // JWT'den alınan user_id
 
-  const query = "SELECT username, urun_Adi , site_adi , satici_isim , teslimat_suresi , kargo_paket_puani , teslimat_puani , fiyat_puani , urun_kalite_puani , musteri_hizmetleri_puani , urun_orj , yorum FROM reviews WHERE user_id = ?";
-  
+  const query =
+    "SELECT username, urun_Adi , site_adi , satici_isim , teslimat_suresi , kargo_paket_puani , teslimat_puani , fiyat_puani , urun_kalite_puani , musteri_hizmetleri_puani , urun_orj , yorum FROM reviews WHERE user_id = ?";
+
   db.query(query, [user_id], (err, results) => {
-  
     if (err) {
       console.log(err);
       return res.status(500).json({ message: "Internal server error", error: err });
@@ -41,4 +41,4 @@ router.get("/", verifyToken, (req, res) => {
     }
   });
 });
-module.exports=router;
+module.exports = router;

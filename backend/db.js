@@ -2,18 +2,17 @@ const mysql = require("mysql");
 require("dotenv").config();
 
 const db = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME,
-  });
-  
-  
-  // Veritabanına bağlanmayı deneyin
-  db.connect((err) => {
-    if (err) {
-      throw err;
-    }
-    console.log("mysql bağlantısı okey");
-  });
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+});
+
+// Veritabanına bağlanmayı deneyin
+db.connect((err) => {
+  if (err) {
+    throw err;
+  }
+  console.log("mysql connection is okey");
+});
 module.exports = db;

@@ -5,7 +5,8 @@ const db = require("./db");
 const router = express.Router();
 
 router.post("/", async (req, res) => {
-  const { firstName, lastName, usernameInput, phone, email, password } = req.body;
+  const { firstName, lastName, usernameInput, phone, email, password } =
+    req.body;
 
   // Kullanıcı adının veritabanında mevcut olup olmadığını kontrol et
   try {
@@ -46,20 +47,6 @@ router.post("/", async (req, res) => {
     );
   });
 });
-
-// Kullanıcı adına göre kullanıcıyı bulma işlevi
-async function getUserByUsername(username) {
-  return new Promise((resolve, reject) => {
-    const query = "SELECT * FROM users WHERE username = ?";
-    db.query(query, [username], (err, results) => {
-      if (err) {
-        return reject(err);
-      }
-      resolve(results[0]);
-    });
-  });
-}
-
 
 // Kullanıcı adına göre kullanıcıyı bulma işlevi
 async function getUserByUsername(username) {
