@@ -28,13 +28,12 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
           className="form-container"
           style={{ display: "flex", flexDirection: "column", gap: "15px" }}
         >
-          {/* Ürün Adı */}
           <div
             className="form-group"
             style={{ display: "flex", alignItems: "center" }}
           >
             <label htmlFor="urun_adi" style={{ flex: "1" }}>
-              Ürün Adı:
+              Product Name:
             </label>
             <input
               id="urun_adi"
@@ -51,13 +50,12 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
             />
           </div>
 
-          {/* Site Adı */}
           <div
             className="form-group"
             style={{ display: "flex", alignItems: "center" }}
           >
             <label htmlFor="site_adi" style={{ flex: "1" }}>
-              Site Adı:
+               Site :
             </label>
             <input
               id="site_adi"
@@ -74,13 +72,12 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
             />
           </div>
 
-          {/* Satıcı İsmi */}
           <div
             className="form-group"
             style={{ display: "flex", alignItems: "center" }}
           >
             <label htmlFor="satici_isim" style={{ flex: "1" }}>
-              Satıcı İsmi:
+              Seller Name:
             </label>
             <input
               id="satici_isim"
@@ -97,13 +94,12 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
             />
           </div>
 
-          {/* Teslimat Süresi */}
           <div
             className="form-group"
             style={{ display: "flex", alignItems: "center" }}
           >
             <label htmlFor="teslimat_suresi" style={{ flex: "1" }}>
-              Teslimat Süresi:
+              Delivery Time:
             </label>
             <input
               id="teslimat_suresi"
@@ -121,78 +117,74 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
             />
           </div>
 
-          {/* Kargo Paket Puanı */}
+
           <div
             className="form-group"
             style={{ display: "flex", alignItems: "center" }}
           >
             <label htmlFor="kargo_paket_puani" style={{ flex: "2" }}>
-              Kargo Paket Puanı:
+              Cargo Packaging Score:
             </label>
             <div style={{ flex: "2", display: "flex" }}>
               {renderStars("kargo_paket_puani")}
             </div>
           </div>
 
-          {/* Teslimat Puanı */}
           <div
             className="form-group"
             style={{ display: "flex", alignItems: "center" }}
           >
             <label htmlFor="teslimat_puani" style={{ flex: "2" }}>
-              Teslimat Puanı:
+              Delivery Score:
             </label>
             <div style={{ flex: "2", display: "flex" }}>
               {renderStars("teslimat_puani")}
             </div>
           </div>
 
-          {/* Fiyat Puanı */}
           <div
             className="form-group"
             style={{ display: "flex", alignItems: "center" }}
           >
             <label htmlFor="fiyat_puani" style={{ flex: "2" }}>
-              Fiyat Puanı:
+            Price Performance score:
             </label>
             <div style={{ flex: "2", display: "flex" }}>
               {renderStars("fiyat_puani")}
             </div>
           </div>
 
-          {/* Ürün Kalite Puanı */}
           <div
             className="form-group"
             style={{ display: "flex", alignItems: "center" }}
           >
             <label htmlFor="urun_kalite_puani" style={{ flex: "2" }}>
-              Ürün Kalite Puanı:
+            Product Quality Score:
             </label>
             <div style={{ flex: "2", display: "flex" }}>
               {renderStars("urun_kalite_puani")}
             </div>
           </div>
 
-          {/* Müşteri Hizmetleri Puanı */}
+    
           <div
             className="form-group"
             style={{ display: "flex", alignItems: "center" }}
           >
             <label htmlFor="musteri_hizmetleri_puani" style={{ flex: "2" }}>
-              Müşteri Hizmetleri Puanı:
+              Customer Services Score:
             </label>
             <div style={{ flex: "2", display: "flex" }}>
               {renderStars("musteri_hizmetleri_puani")}
             </div>
           </div>
 
-          {/* Ürün Orijinalliği */}
           <div
             className="form-group"
             style={{ display: "flex", alignItems: "center" }}
           >
             <label htmlFor="urun_orj" style={{ flex: "2" }}>
-              Ürün Orijinalliği:
+              Is The Product Original ? :
             </label>
             <div style={{ flex: "2", display: "flex", alignItems: "center" }}>
               <input
@@ -216,13 +208,12 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
             </div>
           </div>
 
-          {/* Yorum */}
           <div
             className="form-group"
             style={{ display: "flex", alignItems: "center" }}
           >
             <label htmlFor="yorum" style={{ flex: "1" }}>
-              Yorum:
+              Comment:
             </label>
             <textarea
               id="yorum"
@@ -253,7 +244,7 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
               boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
             }}
           >
-            Gönder
+            Submit
           </button>
         </div>
       </form>
