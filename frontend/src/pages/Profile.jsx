@@ -3,6 +3,7 @@ import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import NewReview from './NewReview';
 import AccountPage from './AccountPage';
+import UserReviewPage from './UserReviewPage';
 
 function Profile() {
  
@@ -14,7 +15,7 @@ function Profile() {
       case 'account':
         return <AccountPage />;
       case 'all-reviews':
-        return <p>My Reviews</p>;
+        return <UserReviewPage />;
       case 'add-review':
         return <NewReview />;
       case 'account-settings':

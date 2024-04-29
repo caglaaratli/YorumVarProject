@@ -4,7 +4,9 @@ import axios from "axios";
 const API_REGISTER = "http://localhost:3001/register";
 const API_LOGIN = "http://localhost:3001/login";
 const API_PROFILE = "http://localhost:3001/profile"; // Profil endpoint'i
-const API_NEW_REVIEW = "http://localhost:3001/new-review"
+const API_NEW_REVIEW = "http://localhost:3001/new-review";
+const API_USER_REVIEW_COUNT = "http://localhost:3001/review-count";
+const API_LOGIN_USER_REVIEWS ="http://localhost:3001/login-user-review"
 
 
 export const registerUser = async (userData) => {
@@ -38,7 +40,16 @@ export const postReview = async (reviewData) => {
 
 export const getUserReviewCount = async () => {
   const token = localStorage.getItem('token');
-  return axios.get("http://localhost:3001/review-count", {
+  return axios.get(API_USER_REVIEW_COUNT, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+};
+
+export const getLoginUserReviews = async () => {
+  const token = localStorage.getItem('token');
+  return axios.get(API_LOGIN_USER_REVIEWS, {
     headers: {
       Authorization: `Bearer ${token}`
     }

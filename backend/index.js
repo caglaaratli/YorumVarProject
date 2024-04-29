@@ -5,6 +5,7 @@ const loginRouter = require("./login");
 const profileRouter = require("./profile");
 const addreviewRouter = require("./new-review");
 const reviewCountRouter = require("./review-count"); 
+const loginUserReviewRouter =require("./login-user-review")
 
 const db = require("./db");
 const cookieParser = require('cookie-parser'); 
@@ -28,6 +29,7 @@ app.use("/login", loginRouter);
 app.use("/profile", profileRouter);
 app.use("/new-review", addreviewRouter)
 app.use("/review-count", reviewCountRouter); 
+app.use("/login-user-review" , loginUserReviewRouter)
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
