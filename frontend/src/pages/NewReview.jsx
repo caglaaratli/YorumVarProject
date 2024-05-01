@@ -34,7 +34,7 @@ function NewReviewPage() {
       const response = await postReview({ ...review, user_id, username });
       if (response.data.message === "Review added successfully") {
         setMessage(response.data.message);
-        setReview(initialReviewState); // Formu başlangıç durumuna sıfırla
+        setReview(initialReviewState); 
         setTimeout(() => setMessage(null), 4000);
       } else {
         setMessage(response.data.message);
@@ -43,7 +43,7 @@ function NewReviewPage() {
       if (error.response) {
         setMessage(error.response.data.message);
       } else {
-        setMessage("İnceleme gönderimi başarısız oldu. Lütfen daha sonra tekrar deneyin.");
+        setMessage("Review submission failed. please try again later.");
       }
     }
   };
