@@ -9,11 +9,11 @@ const Header = () => {
           <img src="/logo.png" className="h-8 sm:h-10" alt="Logo" />
 
           <div className="flex sm:hidden space-x-4">
-            <Link to="/reviews" className="text-sm text-red-400 hover:text-red-700">Reviews</Link>
+            <Link to="/all-reviews" className="text-sm text-red-400 hover:text-red-700">Reviews</Link>
           </div>
           
           <div className="hidden sm:flex space-x-4">
-            <Link to="/reviews" className="text-sm text-red-400 hover:text-red-700">Reviews</Link>
+            <Link to="/all-reviews" className="text-sm text-red-400 hover:text-red-700">Reviews</Link>
           </div>
         </div>
 

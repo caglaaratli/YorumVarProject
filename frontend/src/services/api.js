@@ -6,7 +6,8 @@ const API_LOGIN = "http://localhost:3001/login";
 const API_PROFILE = "http://localhost:3001/profile"; // Profil endpoint'i
 const API_NEW_REVIEW = "http://localhost:3001/new-review";
 const API_USER_REVIEW_COUNT = "http://localhost:3001/review-count";
-const API_LOGIN_USER_REVIEWS ="http://localhost:3001/login-user-review"
+const API_LOGIN_USER_REVIEWS ="http://localhost:3001/login-user-review";
+const API_ALL_REVIEWS ="http://localhost:3001/all-reviews";
 
 
 export const registerUser = async (userData) => {
@@ -54,4 +55,9 @@ export const getLoginUserReviews = async () => {
       Authorization: `Bearer ${token}`
     }
   });
+};
+
+export const getAllReviews = async () => {
+  
+  return axios.get(API_ALL_REVIEWS);
 };

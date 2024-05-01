@@ -5,6 +5,7 @@ import SignUp from '../pages/SignupPage';
 import HomePage from '../pages/HomePage';
 import Profile from '../pages/Profile';
 import NewReview from '../pages/NewReview';
+import AllReviewPage from '../pages/AllReviewPage';
 
 
 const AppRoutes = () => {
@@ -15,6 +16,7 @@ const AppRoutes = () => {
       <Route path="/register" element={<SignUp />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/new-review" element={<NewReview />} />
+      <Route path="/all-reviews" element={<AllReviewPage />} />
     </Routes>
   );
 };
