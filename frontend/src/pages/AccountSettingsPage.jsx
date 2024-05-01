@@ -26,15 +26,12 @@ function AccountPage() {
       setEditMode(false);
       fetchUserProfile();
       setMessage("User updated successfully");
-      // Mesajı 3 saniye sonra kaldır
       setTimeout(() => {
         setMessage(null);
       }, 3000);
     } catch (error) {
       console.error("Failed to update user profile:", error);
       setMessage("Failed to update user profile");
-
-      // Hata durumunda da mesajı 3 saniye sonra kaldır
       setTimeout(() => {
         setMessage(null);
       }, 3000);
