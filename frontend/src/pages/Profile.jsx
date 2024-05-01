@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import NewReview from './NewReview';
 import AccountPage from './AccountPage';
 import UserReviewPage from './UserReviewPage';
+import AccountSettings from './AccountSettingsPage';
 
 function Profile() {
  
@@ -19,7 +20,7 @@ function Profile() {
       case 'add-review':
         return <NewReview />;
       case 'account-settings':
-        return <p>Account Settings</p>;
+        return <AccountSettings />;
       default:
         return <p>Seçim yapınız</p>;
     }

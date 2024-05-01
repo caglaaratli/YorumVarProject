@@ -8,8 +8,7 @@ const API_NEW_REVIEW = "http://localhost:3001/new-review";
 const API_USER_REVIEW_COUNT = "http://localhost:3001/review-count";
 const API_LOGIN_USER_REVIEWS ="http://localhost:3001/login-user-review";
 const API_ALL_REVIEWS ="http://localhost:3001/all-reviews";
-
-
+const API_UPDATE_USER_INFO= "http://localhost:3001/update-user-info"
 export const registerUser = async (userData) => {
   return axios.post(API_REGISTER, userData);
 };
@@ -60,4 +59,13 @@ export const getLoginUserReviews = async () => {
 export const getAllReviews = async () => {
   
   return axios.get(API_ALL_REVIEWS);
+};
+
+export const updateUserProfile = async (userData) => {
+  const token = localStorage.getItem('token');
+  return axios.put(API_UPDATE_USER_INFO, userData, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
 };
