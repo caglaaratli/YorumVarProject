@@ -57,7 +57,7 @@ router.delete("/", verifyToken, (req, res) => {
                 });
               }
               res.send({
-                message: "Kullanıcı ve yorumları başarıyla silindi.",
+                message: "User and comments successfully deleted.",
               });
             });
           }

@@ -6,7 +6,7 @@ import Icon from "react-icomoon";
 function AccountPage() {
   const [user, setUser] = useState(null);
   const [editMode, setEditMode] = useState(false);
-  const [message, setMessage] = useState(null); // Durum eklendi
+  const [message, setMessage] = useState(null); 
 
   useEffect(() => {
     fetchUserProfile();
@@ -44,19 +44,16 @@ function AccountPage() {
     }
   };
   const handleDelete = async () => {
-    if (window.confirm('Hesabınızı silmeyi onaylıyor musunuz?')) {
+    if (window.confirm('Do you confirm deleting your account?')) {
       try {
         await deleteUserAccount();
-        setMessage('Hesabınız başarıyla silindi.');
+        setMessage('Your account has been successfully deleted.');
         setTimeout(() => {
-          // Kullanıcı mesajı gördükten sonra çıkış yapılır
-          // Çıkış işlemi için gereken fonksiyon burada çağrılmalıdır
-          // Örneğin logout() veya benzeri bir fonksiyon
-          logout(); // Bu fonksiyonun tanımlı olduğundan emin olun
-        }, 3000); // 3 saniye sonra çıkış yap
+          logout(); 
+        }, 3000); 
       } catch (error) {
         console.error('Failed to delete user account:', error);
-        setMessage('Hesap silinirken bir hata oluştu.');
+        setMessage('An error occurred while deleting the account.');
         setTimeout(() => {
           setMessage(null);
         }, 3000);
@@ -169,7 +166,7 @@ function AccountPage() {
           </div>
         </div>
       ) : (
-        <p className="text-lg text-gray-500">Yükleniyor...</p>
+        <p className="text-lg text-gray-500">Loading...</p>
       )}
     </div>
   );
