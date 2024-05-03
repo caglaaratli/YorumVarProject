@@ -8,13 +8,14 @@ const reviewCountRouter = require("./review-count");
 const loginUserReviewRouter = require("./login-user-review");
 const allReviewsRouter = require("./all-reviews");
 const updateUserInfoRouter = require("./update-user-info");
+const deleteUserAccountRouter=require("./delete-user-account");
 
 const db = require("./db");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
 const corsOptions = {
-  origin: "http://localhost:5173", // Frontend uygulamanızın adresi
+  origin: "http://localhost:5173", 
   credentials: true, // Credential'ların (çerezler, HTTP yetkilendirme başlıkları vb.) gönderilmesine izin ver
 };
 
@@ -31,6 +32,7 @@ app.use("/review-count", reviewCountRouter);
 app.use("/login-user-review", loginUserReviewRouter);
 app.use("/all-reviews", allReviewsRouter);
 app.use("/update-user-info", updateUserInfoRouter);
+app.use("/delete-user-account", deleteUserAccountRouter);
 
 
 const PORT = process.env.PORT || 3001;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getUserProfile, updateUserProfile } from "../services/api";
+import { getUserProfile, updateUserProfile ,deleteUserAccount } from "../services/api";
 import iconSet from "../assets/selection.json";
 import Icon from "react-icomoon";
 
@@ -20,6 +20,12 @@ function AccountPage() {
       console.error("Failed to fetch user profile:", error);
     }
   };
+
+  const logout = () => {
+    localStorage.removeItem('token');
+    window.location.href = '/';
+  };
+
   const handleUpdate = async () => {
     try {
       await updateUserProfile(user);
@@ -37,17 +43,27 @@ function AccountPage() {
       }, 3000);
     }
   };
-  /*const handleDelete = async () => {
+  const handleDelete = async () => {
     if (window.confirm('Hesabınızı silmeyi onaylıyor musunuz?')) {
       try {
         await deleteUserAccount();
-        // Kullanıcıyı çıkış yapmaya yönlendir veya başka bir sayfaya yönlendir
+        setMessage('Hesabınız başarıyla silindi.');
+        setTimeout(() => {
+          // Kullanıcı mesajı gördükten sonra çıkış yapılır
+          // Çıkış işlemi için gereken fonksiyon burada çağrılmalıdır
+          // Örneğin logout() veya benzeri bir fonksiyon
+          logout(); // Bu fonksiyonun tanımlı olduğundan emin olun
+        }, 3000); // 3 saniye sonra çıkış yap
       } catch (error) {
         console.error('Failed to delete user account:', error);
+        setMessage('Hesap silinirken bir hata oluştu.');
+        setTimeout(() => {
+          setMessage(null);
+        }, 3000);
       }
     }
   };
-*/
+
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100 p-4">
       {user ? (
@@ -136,13 +152,19 @@ function AccountPage() {
               onClick={() => setEditMode(true)}
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             >
-              Bilgilerimi Düzenle
+              Edit my information
             </button>
             <button
               onClick={handleUpdate}
               className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
             >
-              Kaydet
+              Save
+            </button>
+            <button
+              onClick={handleDelete}
+              className="bg-green-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Delete my account
             </button>
           </div>
         </div>
