@@ -52,13 +52,13 @@ const Header = () => {
                       Profile
                     </Link>
                     <Link
-                      to="/my-reviews"
+                      to="/login-user-review"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     >
                       My Reviews
                     </Link>
                     <Link
-                      to="/settings"
+                      to="/account-settings"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     >
                       Settings
