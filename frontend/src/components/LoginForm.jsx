@@ -10,8 +10,8 @@ function LoginForm({ onLogin }) {
       password: "",
     },
     {
-      email: { required: true, name: "E-posta" },
-      password: { required: true, name: "Şifre" },
+      email: { required: true, name: "E-mail" },
+      password: { required: true, name: "Password" },
     }
   );
 
