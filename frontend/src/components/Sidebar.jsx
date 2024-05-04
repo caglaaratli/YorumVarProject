@@ -46,7 +46,7 @@ function Sidebar({ setContent }) {
           My Account
         </button>
         <button
-          onClick={() => setContent("all-reviews")}
+          onClick={() => setContent("login-user-review")}
           className="w-full p-2 bg-indigo-500 text-white rounded hover:bg-indigo-600"
         >
           My Reviews

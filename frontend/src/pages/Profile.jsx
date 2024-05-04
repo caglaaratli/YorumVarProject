@@ -15,7 +15,7 @@ function Profile() {
     switch (content) {
       case 'account':
         return <AccountPage />;
-      case 'all-reviews':
+      case 'login-user-review':
         return <UserReviewPage />;
       case 'add-review':
         return <NewReview />;
