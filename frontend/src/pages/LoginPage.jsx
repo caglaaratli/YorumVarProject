@@ -2,29 +2,48 @@ import LoginForm from "../components/LoginForm";
 import { loginUser } from "../services/api";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { loginUser as loginUserRedux } from '../redux/actions/authActions'; // Redux action'ını import et
+
 
 function Login() {
   const [message, setMessage] = useState(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch(); // Redux için dispatch hook'unu kullan
+
 
   const handleLogin = async (values) => {
     try {
       const response = await loginUser(values);
-      localStorage.setItem("token", response.data.token); // Token'ı localStorage'a kaydet
-      localStorage.setItem(
-        "user",
-        JSON.stringify({
+      if (response.data.token) {
+        // Redux store'unda kullanıcı bilgilerini güncelle
+        dispatch(loginUserRedux({
           userId: response.data.userId,
           email: response.data.email,
           name: response.data.name,
           surname: response.data.surname,
           username: response.data.username,
           phoneNumber: response.data.phone,
-        })
-      ); // Kullanıcı bilgilerini localStorage'a kaydet
-      setMessage(response.data.message);
-      setTimeout(() => setMessage(null), 4000);
-      navigate("/profile");
+        }));
+
+        localStorage.setItem("token", response.data.token); // Token'ı localStorage'a kaydet
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            userId: response.data.userId,
+            email: response.data.email,
+            name: response.data.name,
+            surname: response.data.surname,
+            username: response.data.username,
+            phoneNumber: response.data.phone,
+          })
+        ); // Kullanıcı bilgilerini localStorage'a kaydet
+        setMessage(response.data.message);
+        setTimeout(() => setMessage(null), 4000);
+        navigate("/profile");
+      } else {
+        throw new Error('No token received');
+      }
     } catch (error) {
       if (error.response) {
         setMessage(error.response.data.message);
