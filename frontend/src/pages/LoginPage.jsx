@@ -3,7 +3,7 @@ import { loginUser } from "../services/api";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { loginUser as loginUserRedux } from '../redux/actions/authActions'; // Redux action'ını import et
+import { loginUser as loginUserRedux } from '../redux/actions/authActions'; 
 
 
 function Login() {
@@ -26,7 +26,7 @@ function Login() {
           phoneNumber: response.data.phone,
         }));
 
-        localStorage.setItem("token", response.data.token); // Token'ı localStorage'a kaydet
+        localStorage.setItem("token", response.data.token); 
         localStorage.setItem(
           "user",
           JSON.stringify({
@@ -40,7 +40,7 @@ function Login() {
         ); // Kullanıcı bilgilerini localStorage'a kaydet
         setMessage(response.data.message);
         setTimeout(() => setMessage(null), 4000);
-        navigate("/profile");
+        navigate("/");
       } else {
         throw new Error('No token received');
       }
