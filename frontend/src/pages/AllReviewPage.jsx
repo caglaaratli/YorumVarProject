@@ -43,7 +43,7 @@ function AllReviewsPage() {
   }
 
   return (
-    <div>
+    <div className="container mx-auto  flex-col md:flex-row" >
       <div className="flex justify-center items-center mt-10 mb-5">
       <div className="flex items-center bg-white rounded-full shadow-lg">
         <div className="p-4">
@@ -56,8 +56,6 @@ function AllReviewsPage() {
           value={searchTerm}
           onChange={handleSearchChange}
         />
-
-       
       </div>
     </div>
       <ReviewList reviews={handleSearch()} />
