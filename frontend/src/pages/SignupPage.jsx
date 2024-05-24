@@ -1,9 +1,11 @@
 import { useState } from "react";
 import SignUpForm from "../components/SignUpForm";
 import { registerUser } from "../services/api";
+import { useNavigate } from "react-router-dom";
 
 function SignUp() {
   const [message, setMessage] = useState(null);
+  const navigate = useNavigate();
 
   const handleRegistration = async (values) => {
     const income = await registerUser(values);
@@ -16,8 +18,8 @@ function SignUp() {
         setMessage(income.data);
       } else if (income.data === "User registered successfully") {
         setMessage(income.data);
-          // BURADA PROFILE BİLGİLERİNİ LOCAL STORAGE'A KAYDET VE PROFİLE SAYFASINDA LOCAL STORAGE'DAN ÇAĞIR
-        window.location.href = "/profile";
+    
+        navigate("/login");
       }
     } else if (income.status === 500) {
       setMessage("Registration failed. Please try again later.");
