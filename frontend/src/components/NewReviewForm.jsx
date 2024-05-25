@@ -49,6 +49,27 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
               }}
             />
           </div>
+          <div
+            className="form-group"
+            style={{ display: "flex", alignItems: "center" }}
+          >
+            <label htmlFor="marka_adi" style={{ flex: "1" }}>
+              Marka:
+            </label>
+            <input
+              id="marka_adi"
+              name="marka_adi"
+              value={review.marka_adi}
+              onChange={handleChange}
+              style={{
+                flex: "2",
+                padding: "10px",
+                borderRadius: "4px",
+                border: "1px solid #ddd",
+                boxShadow: "inset 0 1px 3px rgba(0,0,0,0.1)",
+              }}
+            />
+          </div>
 
           <div
             className="form-group"

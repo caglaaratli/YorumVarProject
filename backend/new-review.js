@@ -26,6 +26,7 @@ const verifyToken = (req, res, next) => {
 router.post("/", verifyToken, (req, res) => {
   const {
     urun_adi,
+    marka_adi,
     site_adi,
     satici_isim,
     teslimat_suresi,
@@ -42,7 +43,7 @@ router.post("/", verifyToken, (req, res) => {
   const username = req.user.username; // JWT'den alınan kullanıcı adı
 
   const query =
-    "INSERT INTO reviews (user_id, username, urun_adi, site_adi, satici_isim, teslimat_suresi , kargo_paket_puani,teslimat_puani, fiyat_puani,urun_kalite_puani, musteri_hizmetleri_puani,  urun_orj ,yorum ) VALUES (?, ?, ?, ?, ?,?, ?, ?, ?, ?,?,?,?)";
+    "INSERT INTO reviews (user_id, username, urun_adi,marka_adi, site_adi, satici_isim, teslimat_suresi , kargo_paket_puani,teslimat_puani, fiyat_puani,urun_kalite_puani, musteri_hizmetleri_puani,  urun_orj ,yorum ) VALUES (?, ?, ?,?, ?, ?,?, ?, ?, ?, ?,?,?,?)";
 
   db.query(
     query,
@@ -50,6 +51,7 @@ router.post("/", verifyToken, (req, res) => {
       user_id,
       username,
       urun_adi,
+      marka_adi,
       site_adi,
       satici_isim,
       teslimat_suresi,

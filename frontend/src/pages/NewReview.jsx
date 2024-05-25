@@ -5,6 +5,7 @@ import { postReview } from '../services/api';
 function NewReviewPage() {
   const initialReviewState = {
     urun_adi: "",
+    marka_adi: "",
     site_adi: "",
     satici_isim: "",
     teslimat_suresi: "",
