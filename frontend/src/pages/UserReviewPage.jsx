@@ -22,7 +22,14 @@ function UserReviewPage() {
     return <p>Loading...</p>;
   }
 
-  return <ReviewList reviews={reviews} />;
+  
+  return (
+    <div className="container mx-auto flex-col md:flex-row" >
+      <ReviewList reviews={reviews} />
+      </div>
+ 
+);
+
 }
 
 export default UserReviewPage;
