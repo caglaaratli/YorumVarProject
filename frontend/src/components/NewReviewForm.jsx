@@ -1,6 +1,39 @@
 import PropTypes from "prop-types";
-
+import { getBrands } from "../services/api";
+import { useState,useEffect } from "react";
 function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
+  const [brands, setBrands] = useState([]);
+  const [selectedBrand, setSelectedBrand] = useState(review.marka_adi);
+  const [isCustomBrand, setIsCustomBrand] = useState(false);
+
+  useEffect(() => {
+    const fetchBrands = async () => {
+      try {
+        const response = await getBrands();
+        setBrands(response.data);
+      } catch (error) {
+        console.error("Error fetching brands:", error);
+      }
+    };
+
+    fetchBrands();
+  }, []);
+
+  const handleBrandChange = (e) => {
+    if (e.target.value === "custom") {
+      setIsCustomBrand(true);
+      setSelectedBrand("");
+    } else {
+      setIsCustomBrand(false);
+      setSelectedBrand(e.target.value);
+      handleChange(e);
+    }
+  };
+
+  const handleCustomBrandChange = (e) => {
+    setSelectedBrand(e.target.value);
+    handleChange(e);
+  };
   return (
     <div
       style={{
@@ -49,18 +82,15 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
               }}
             />
           </div>
-          <div
-            className="form-group"
-            style={{ display: "flex", alignItems: "center" }}
-          >
+          <div className="form-group" style={{ display: "flex", alignItems: "center" }}>
             <label htmlFor="marka_adi" style={{ flex: "1" }}>
               Marka:
             </label>
-            <input
+            <select
               id="marka_adi"
               name="marka_adi"
-              value={review.marka_adi}
-              onChange={handleChange}
+              value={isCustomBrand ? "custom" : selectedBrand}
+              onChange={handleBrandChange}
               style={{
                 flex: "2",
                 padding: "10px",
@@ -68,8 +98,38 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
                 border: "1px solid #ddd",
                 boxShadow: "inset 0 1px 3px rgba(0,0,0,0.1)",
               }}
-            />
+            >
+              <option value="">Marka Seçin</option>
+              {brands.map((brand, index) => (
+                <option key={index} value={brand.brand_name}>
+                  {brand.brand_name}
+                </option>
+              ))}
+              <option value="custom">Yeni Marka Ekle</option>
+            </select>
           </div>
+
+          {isCustomBrand && (
+            <div className="form-group" style={{ display: "flex", alignItems: "center" }}>
+              <label htmlFor="customBrand" style={{ flex: "1" }}>
+                Yeni Marka Adı:
+              </label>
+              <input
+                id="customBrand"
+                name="marka_adi"
+                value={selectedBrand}
+                onChange={handleCustomBrandChange}
+                placeholder="Yeni marka adı girin"
+                style={{
+                  flex: "2",
+                  padding: "10px",
+                  borderRadius: "4px",
+                  border: "1px solid #ddd",
+                  boxShadow: "inset 0 1px 3px rgba(0,0,0,0.1)",
+                }}
+              />
+            </div>
+          )}
 
           <div
             className="form-group"

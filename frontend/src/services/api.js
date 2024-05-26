@@ -10,6 +10,7 @@ const API_LOGIN_USER_REVIEWS ="http://localhost:3001/login-user-review";
 const API_ALL_REVIEWS ="http://localhost:3001/all-reviews";
 const API_UPDATE_USER_INFO= "http://localhost:3001/update-user-info";
 const API_DELETE_USER = "http://localhost:3001/delete-user-account";
+const API_BRANDS_NAME = "http://localhost:3001/get-brands";
 
 
 export const registerUser = async (userData) => {
@@ -80,4 +81,8 @@ export const deleteUserAccount = async () => {
       Authorization: `Bearer ${token}`
     }
   });
+};
+
+export const getBrands = async () => {
+  return axios.get(API_BRANDS_NAME); 
 };
