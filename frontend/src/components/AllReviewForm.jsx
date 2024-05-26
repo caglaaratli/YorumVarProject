@@ -36,6 +36,7 @@ function ReviewList({ reviews }) {
           <h3 className="font-bold text-lg">{review.urun_Adi}</h3>
           <div className="mt-2">
             <p className="font-bold">Username: {review.username}</p>
+            <p className="font-bold">Brands: {review.marka_adi}</p>
             <p className="text-sm">Site: {review.site_adi}</p>
             <p className="text-sm">Seller: {review.satici_isim}</p>
             <p className="text-sm">Delivery time: {review.teslimat_suresi} day</p>

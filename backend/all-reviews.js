@@ -4,10 +4,12 @@ require("dotenv").config();
 const router = express.Router();
 
 router.get("/", (req, res) => {
+
     const query =
-      "SELECT username, urun_Adi, site_adi, satici_isim, teslimat_suresi, kargo_paket_puani, teslimat_puani, fiyat_puani, urun_kalite_puani, musteri_hizmetleri_puani, urun_orj, yorum FROM reviews";
+      "SELECT username, urun_Adi, marka_adi ,site_adi, satici_isim, teslimat_suresi, kargo_paket_puani, teslimat_puani, fiyat_puani, urun_kalite_puani, musteri_hizmetleri_puani, urun_orj, yorum FROM reviews";
   
     db.query(query, (err, results) => {
+
       if (err) {
         console.error("Error executing SQL query:", err);
         return res.status(500).json({ message: "Internal server error" });
