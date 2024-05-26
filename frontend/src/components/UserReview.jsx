@@ -35,6 +35,7 @@ function ReviewList({ reviews }) {
         <div key={index} className="border border-gray-300 m-2 p-2">
           <h3 className="font-bold">{review.urun_Adi}</h3>
           <div className="flex justify-between">
+          <p className="text-sm">Brands: {review.marka_adi}</p>
             <p className="text-sm">Site: {review.site_adi}</p>
             <p className="text-sm">Seller: {review.satici_isim}</p>
             <p className="text-sm">Delivery time: {review.teslimat_suresi} day</p>
