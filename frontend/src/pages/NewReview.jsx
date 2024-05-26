@@ -21,12 +21,12 @@ function NewReviewPage() {
   const [review, setReview] = useState(initialReviewState);
   const [message, setMessage] = useState(null);
 
-
   const handleChange = (e) => {
-    setReview({ ...review, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    const formattedValue = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+    setReview({ ...review, [name]: formattedValue });
   };
 
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
     const user = JSON.parse(localStorage.getItem("user"));
@@ -35,7 +35,7 @@ function NewReviewPage() {
       const response = await postReview({ ...review, user_id, username });
       if (response.data.message === "Review added successfully") {
         setMessage(response.data.message);
-        setReview(initialReviewState); 
+        setReview(initialReviewState);
         setTimeout(() => setMessage(null), 4000);
       } else {
         setMessage(response.data.message);
@@ -73,7 +73,7 @@ function NewReviewPage() {
   };
 
   return (
-   <div>
+    <div>
       {message && (
         <div className="text-center p-3 mb-2 bg-green-100 border border-green-400 text-green-700">
           {message}

@@ -1,6 +1,8 @@
+
 import PropTypes from "prop-types";
 import { getBrands } from "../services/api";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
+
 function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
   const [brands, setBrands] = useState([]);
   const [selectedBrand, setSelectedBrand] = useState(review.marka_adi);
@@ -23,6 +25,7 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
     if (e.target.value === "custom") {
       setIsCustomBrand(true);
       setSelectedBrand("");
+      handleChange({ target: { name: "marka_adi", value: "" } });
     } else {
       setIsCustomBrand(false);
       setSelectedBrand(e.target.value);
@@ -31,9 +34,12 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
   };
 
   const handleCustomBrandChange = (e) => {
-    setSelectedBrand(e.target.value);
-    handleChange(e);
+    const { name, value } = e.target;
+    const formattedValue = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+    setSelectedBrand(formattedValue);
+    handleChange({ target: { name, value: formattedValue } });
   };
+
   return (
     <div
       style={{
@@ -61,10 +67,7 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
           className="form-container"
           style={{ display: "flex", flexDirection: "column", gap: "15px" }}
         >
-          <div
-            className="form-group"
-            style={{ display: "flex", alignItems: "center" }}
-          >
+          <div className="form-group" style={{ display: "flex", alignItems: "center" }}>
             <label htmlFor="urun_adi" style={{ flex: "1" }}>
               Product Name:
             </label>
@@ -131,10 +134,7 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
             </div>
           )}
 
-          <div
-            className="form-group"
-            style={{ display: "flex", alignItems: "center" }}
-          >
+          <div className="form-group" style={{ display: "flex", alignItems: "center" }}>
             <label htmlFor="site_adi" style={{ flex: "1" }}>
               Site :
             </label>
@@ -152,7 +152,6 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
               }}
             />
           </div>
-
           <div
             className="form-group"
             style={{ display: "flex", alignItems: "center" }}
