@@ -25,7 +25,7 @@ function AllReviewsPage() {
 
   const handleSearch = () => {
     const filteredReviews = reviews.filter(review =>
-      review.urun_Adi.toLowerCase().includes(searchTerm.toLowerCase())
+      review.urun_Adi.toLocaleLowerCase('tr-TR').includes(searchTerm.toLocaleLowerCase('tr-TR'))
     );
     return filteredReviews;
   };
@@ -43,21 +43,21 @@ function AllReviewsPage() {
   }
 
   return (
-    <div className="container mx-auto  flex-col md:flex-row" >
+    <div className="container mx-auto flex-col md:flex-row" >
       <div className="flex justify-center items-center mt-10 mb-5">
-      <div className="flex items-center bg-white rounded-full shadow-lg">
-        <div className="p-4">
-          <Icon iconSet={iconSet} icon="search" className="w-6 h-6" />
+        <div className="flex items-center bg-white rounded-full shadow-lg">
+          <div className="p-4">
+            <Icon iconSet={iconSet} icon="search" className="w-6 h-6" />
+          </div>
+          <input
+            type="text"
+            className="px-4 py-3 w-full sm:w-64 focus:outline-none rounded-full"
+            placeholder="Search product"
+            value={searchTerm}
+            onChange={handleSearchChange}
+          />
         </div>
-        <input
-          type="text"
-          className="px-4 py-3 w-full sm:w-64 focus:outline-none rounded-full"
-          placeholder="Search product"
-          value={searchTerm}
-          onChange={handleSearchChange}
-        />
       </div>
-    </div>
       <ReviewList reviews={handleSearch()} />
     </div>
   );
