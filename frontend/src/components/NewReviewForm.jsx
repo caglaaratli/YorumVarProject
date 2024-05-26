@@ -1,12 +1,14 @@
-
 import PropTypes from "prop-types";
-import { getBrands } from "../services/api";
+import { getBrands, getProducts } from "../services/api"; 
 import { useState, useEffect } from "react";
 
 function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
   const [brands, setBrands] = useState([]);
+  const [products, setProducts] = useState([]); 
   const [selectedBrand, setSelectedBrand] = useState(review.marka_adi);
+  const [selectedProduct, setSelectedProduct] = useState(review.urun_adi); 
   const [isCustomBrand, setIsCustomBrand] = useState(false);
+  const [isCustomProduct, setIsCustomProduct] = useState(false); 
 
   useEffect(() => {
     const fetchBrands = async () => {
@@ -18,7 +20,17 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
       }
     };
 
+    const fetchProducts = async () => { 
+      try {
+        const response = await getProducts();
+        setProducts(response.data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
     fetchBrands();
+    fetchProducts(); 
   }, []);
 
   const handleBrandChange = (e) => {
@@ -33,10 +45,29 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
     }
   };
 
+  const handleProductChange = (e) => { 
+    if (e.target.value === "custom") {
+      setIsCustomProduct(true);
+      setSelectedProduct("");
+      handleChange({ target: { name: "urun_adi", value: "" } });
+    } else {
+      setIsCustomProduct(false);
+      setSelectedProduct(e.target.value);
+      handleChange(e);
+    }
+  };
+
   const handleCustomBrandChange = (e) => {
     const { name, value } = e.target;
     const formattedValue = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
     setSelectedBrand(formattedValue);
+    handleChange({ target: { name, value: formattedValue } });
+  };
+
+  const handleCustomProductChange = (e) => { 
+    const { name, value } = e.target;
+    const formattedValue = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+    setSelectedProduct(formattedValue);
     handleChange({ target: { name, value: formattedValue } });
   };
 
@@ -71,11 +102,11 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
             <label htmlFor="urun_adi" style={{ flex: "1" }}>
               Product Name:
             </label>
-            <input
+            <select
               id="urun_adi"
               name="urun_adi"
-              value={review.urun_adi}
-              onChange={handleChange}
+              value={isCustomProduct ? "custom" : selectedProduct}
+              onChange={handleProductChange}
               style={{
                 flex: "2",
                 padding: "10px",
@@ -83,8 +114,39 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
                 border: "1px solid #ddd",
                 boxShadow: "inset 0 1px 3px rgba(0,0,0,0.1)",
               }}
-            />
+            >
+              <option value="">Ürün Seçin</option>
+              {products.map((product, index) => (
+                <option key={index} value={product.product_name}>
+                  {product.product_name}
+                </option>
+              ))}
+              <option value="custom">Yeni Ürün Ekle</option>
+            </select>
           </div>
+
+          {isCustomProduct && (
+            <div className="form-group" style={{ display: "flex", alignItems: "center" }}>
+              <label htmlFor="customProduct" style={{ flex: "1" }}>
+                Yeni Ürün Adı:
+              </label>
+              <input
+                id="customProduct"
+                name="urun_adi"
+                value={selectedProduct}
+                onChange={handleCustomProductChange}
+                placeholder="Yeni ürün adı girin"
+                style={{
+                  flex: "2",
+                  padding: "10px",
+                  borderRadius: "4px",
+                  border: "1px solid #ddd",
+                  boxShadow: "inset 0 1px 3px rgba(0,0,0,0.1)",
+                }}
+              />
+            </div>
+          )}
+
           <div className="form-group" style={{ display: "flex", alignItems: "center" }}>
             <label htmlFor="marka_adi" style={{ flex: "1" }}>
               Marka:
@@ -152,10 +214,7 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
               }}
             />
           </div>
-          <div
-            className="form-group"
-            style={{ display: "flex", alignItems: "center" }}
-          >
+          <div className="form-group" style={{ display: "flex", alignItems: "center" }}>
             <label htmlFor="satici_isim" style={{ flex: "1" }}>
               Seller Name:
             </label>
@@ -174,10 +233,7 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
             />
           </div>
 
-          <div
-            className="form-group"
-            style={{ display: "flex", alignItems: "center" }}
-          >
+          <div className="form-group" style={{ display: "flex", alignItems: "center" }}>
             <label htmlFor="teslimat_suresi" style={{ flex: "1" }}>
               Delivery Time:
             </label>
@@ -197,10 +253,7 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
             />
           </div>
 
-          <div
-            className="form-group"
-            style={{ display: "flex", alignItems: "center" }}
-          >
+          <div className="form-group" style={{ display: "flex", alignItems: "center" }}>
             <label htmlFor="kargo_paket_puani" style={{ flex: "2" }}>
               Cargo Packaging Score:
             </label>
@@ -209,10 +262,7 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
             </div>
           </div>
 
-          <div
-            className="form-group"
-            style={{ display: "flex", alignItems: "center" }}
-          >
+          <div className="form-group" style={{ display: "flex", alignItems: "center" }}>
             <label htmlFor="teslimat_puani" style={{ flex: "2" }}>
               Delivery Score:
             </label>
@@ -221,10 +271,7 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
             </div>
           </div>
 
-          <div
-            className="form-group"
-            style={{ display: "flex", alignItems: "center" }}
-          >
+          <div className="form-group" style={{ display: "flex", alignItems: "center" }}>
             <label htmlFor="fiyat_puani" style={{ flex: "2" }}>
               Price Performance score:
             </label>
@@ -233,10 +280,7 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
             </div>
           </div>
 
-          <div
-            className="form-group"
-            style={{ display: "flex", alignItems: "center" }}
-          >
+          <div className="form-group" style={{ display: "flex", alignItems: "center" }}>
             <label htmlFor="urun_kalite_puani" style={{ flex: "2" }}>
               Product Quality Score:
             </label>
@@ -245,10 +289,7 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
             </div>
           </div>
 
-          <div
-            className="form-group"
-            style={{ display: "flex", alignItems: "center" }}
-          >
+          <div className="form-group" style={{ display: "flex", alignItems: "center" }}>
             <label htmlFor="musteri_hizmetleri_puani" style={{ flex: "2" }}>
               Customer Services Score:
             </label>
@@ -257,10 +298,7 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
             </div>
           </div>
 
-          <div
-            className="form-group"
-            style={{ display: "flex", alignItems: "center" }}
-          >
+          <div className="form-group" style={{ display: "flex", alignItems: "center" }}>
             <label htmlFor="urun_orj" style={{ flex: "2" }}>
               Is The Product Original ? :
             </label>
@@ -286,10 +324,7 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
             </div>
           </div>
 
-          <div
-            className="form-group"
-            style={{ display: "flex", alignItems: "center" }}
-          >
+          <div className="form-group" style={{ display: "flex", alignItems: "center" }}>
             <label htmlFor="yorum" style={{ flex: "1" }}>
               Comment:
             </label>

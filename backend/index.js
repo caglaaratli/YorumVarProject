@@ -10,7 +10,7 @@ const allReviewsRouter = require("./all-reviews");
 const updateUserInfoRouter = require("./update-user-info");
 const deleteUserAccountRouter=require("./delete-user-account");
 const getBrandsNameRouter = require("./get-brands");
-
+const getProductsNameRouter = require("./get-products");
 
 const db = require("./db");
 const cookieParser = require("cookie-parser");
@@ -36,7 +36,7 @@ app.use("/all-reviews", allReviewsRouter);
 app.use("/update-user-info", updateUserInfoRouter);
 app.use("/delete-user-account", deleteUserAccountRouter);
 app.use("/get-brands", getBrandsNameRouter);
-
+app.use("/get-products", getProductsNameRouter);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
