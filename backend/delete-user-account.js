@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const router = express.Router();
 
-// JWT token'ı doğrulama middleware'ı
 const verifyToken = (req, res, next) => {
   const bearerHeader = req.headers["authorization"];
   if (typeof bearerHeader !== "undefined") {
@@ -24,46 +23,53 @@ const verifyToken = (req, res, next) => {
 };
 
 router.delete("/", verifyToken, (req, res) => {
-  const userId = req.user.id;
+  const userId = req.user.userId;
+  console.log(`Attempting to delete user with ID: ${userId}`);
+
   db.beginTransaction((err) => {
     if (err) {
+      console.error("Error starting transaction:", err);
       throw err;
     }
 
-    db.query(
-      "DELETE FROM reviews WHERE user_id = ?",
-      [userId],
-      (error, results) => {
+    db.query("DELETE FROM reviews WHERE user_id = ?", [userId], (error, results) => {
+      if (error) {
+        console.error("Error deleting from reviews:", error);
+        return db.rollback(() => {
+          throw error;
+        });
+      }
+
+      db.query("DELETE FROM comments WHERE user_id = ?", [userId], (error, results) => {
         if (error) {
+          console.error("Error deleting from comments:", error);
           return db.rollback(() => {
             throw error;
           });
         }
 
-        db.query(
-          "DELETE FROM users WHERE id = ?",
-          [userId],
-          (error, results) => {
-            if (error) {
-              return db.rollback(() => {
-                throw error;
-              });
-            }
-
-            db.commit((err) => {
-              if (err) {
-                return db.rollback(() => {
-                  throw err;
-                });
-              }
-              res.send({
-                message: "User and comments successfully deleted.",
-              });
+        db.query("DELETE FROM users WHERE id = ?", [userId], (error, results) => {
+          if (error) {
+            console.error("Error deleting from users:", error);
+            return db.rollback(() => {
+              throw error;
             });
           }
-        );
-      }
-    );
+
+          db.commit((err) => {
+            if (err) {
+              console.error("Error committing transaction:", err);
+              return db.rollback(() => {
+                throw err;
+              });
+            }
+            res.send({
+              message: "User and related data successfully deleted.",
+            });
+          });
+        });
+      });
+    });
   });
 });
 

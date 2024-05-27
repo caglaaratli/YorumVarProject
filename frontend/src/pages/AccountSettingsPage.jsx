@@ -1,8 +1,9 @@
-
 import { useEffect, useState } from "react";
+import { useDispatch } from 'react-redux';
 import { getUserProfile, updateUserProfile, deleteUserAccount } from "../services/api";
 import AccountSettingsForm from "../components/AccountSettingsForm";
 import { useNavigate } from "react-router-dom";
+import { logoutUser } from "../redux/actions/authActions";
 
 function AccountPage() {
   const [user, setUser] = useState(null);
@@ -10,6 +11,7 @@ function AccountPage() {
   const [message, setMessage] = useState(null);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     fetchUserProfile();
@@ -25,7 +27,7 @@ function AccountPage() {
   };
 
   const logout = () => {
-    localStorage.removeItem('token');
+    dispatch(logoutUser());
     navigate("/");
   };
 
@@ -69,7 +71,7 @@ function AccountPage() {
     }
   };
 
-    return (
+  return (
     <div className="flex justify-center items-center h-screen bg-gray-100 p-4">
       <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm">
         {message && (
