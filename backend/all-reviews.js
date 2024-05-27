@@ -6,7 +6,7 @@ const router = express.Router();
 router.get("/", (req, res) => {
 
     const query =
-      "SELECT username, urun_Adi, marka_adi ,site_adi, satici_isim, teslimat_suresi, kargo_paket_puani, teslimat_puani, fiyat_puani, urun_kalite_puani, musteri_hizmetleri_puani, urun_orj, yorum FROM reviews";
+      "SELECT id , username, urun_Adi, marka_adi ,site_adi, satici_isim, teslimat_suresi, kargo_paket_puani, teslimat_puani, fiyat_puani, urun_kalite_puani, musteri_hizmetleri_puani, urun_orj, yorum FROM reviews";
   
     db.query(query, (err, results) => {
 

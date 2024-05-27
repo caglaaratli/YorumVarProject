@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const StarRating = ({ count }) => {
   return (
@@ -50,6 +51,7 @@ function ReviewList({ reviews }) {
             <div><p className="text-xs">Customer Service:</p><StarRating count={review.musteri_hizmetleri_puani} /></div>
           </div>
           <p className="mt-4 text-sm">Comment: {review.yorum}</p>
+          <Link to={`/review/${review.id}`} className="text-blue-500">View Comments</Link> {/* Linki güncelledik */}
         </div>
       ))}
     </div>

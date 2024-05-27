@@ -1,4 +1,3 @@
-
 import { Route, Routes } from 'react-router-dom';
 import Login from '../pages/LoginPage';
 import SignUp from '../pages/SignupPage';
@@ -8,6 +7,7 @@ import NewReview from '../pages/NewReview';
 import AllReviewPage from '../pages/AllReviewPage';
 import UserReviewPage from '../pages/UserReviewPage';
 import AccountSettingsPage from '../pages/AccountSettingsPage';
+import ReviewCommentPage from '../pages/ReviewCommentPage'; 
 
 const AppRoutes = () => {
   return (
@@ -20,6 +20,7 @@ const AppRoutes = () => {
       <Route path="/all-reviews" element={<AllReviewPage />} />
       <Route path="/login-user-review" element={<UserReviewPage />} />
       <Route path="/account-settings" element={<AccountSettingsPage />} />
+      <Route path="/review/:reviewId" element={<ReviewCommentPage />} /> 
     </Routes>
   );
 };
