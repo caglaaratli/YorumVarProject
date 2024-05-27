@@ -1,4 +1,4 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getReview, getComments, addComment } from '../services/api';
 
@@ -7,16 +7,15 @@ const ReviewCommentPage = () => {
   const [review, setReview] = useState(null);
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState('');
+  const [parentCommentId, setParentCommentId] = useState(0);
 
   useEffect(() => {
-    // Değerlendirme detaylarını çek
     getReview(reviewId).then((response) => {
       setReview(response.data);
     }).catch((error) => {
       console.error('Error fetching review:', error);
     });
 
-    // Yorumları çek
     getComments(reviewId).then((response) => {
       setComments(response.data);
     }).catch((error) => {
@@ -29,11 +28,11 @@ const ReviewCommentPage = () => {
     try {
       await addComment({
         rev_id: reviewId,
-        parent_id: 0,
+        parent_id: parentCommentId,
         comment,
       });
       setComment('');
-      // Yorumları tekrar yükle
+      setParentCommentId(0);
       getComments(reviewId).then((response) => {
         setComments(response.data);
       }).catch((error) => {
@@ -44,6 +43,20 @@ const ReviewCommentPage = () => {
       console.error('Error adding comment', error);
       alert('Failed to add comment');
     }
+  };
+
+  const renderComments = (parentId) => {
+    return comments
+      .filter((c) => c.parent_id === parentId)
+      .map((comment) => (
+        <div key={comment.id} className="border border-gray-300 my-2 p-2">
+          <p><strong>{comment.username}:</strong> {comment.comment}</p>
+          <button onClick={() => setParentCommentId(comment.id)} className="text-blue-500">Reply</button>
+          <div className="ml-4">
+            {renderComments(comment.id)}
+          </div>
+        </div>
+      ));
   };
 
   if (!review) {
@@ -66,11 +79,7 @@ const ReviewCommentPage = () => {
         {comments.length === 0 ? (
           <p>No comments yet.</p>
         ) : (
-          comments.map((comment, index) => (
-            <div key={index} className="border border-gray-300 my-2 p-2">
-              <p><strong>{comment.username}:</strong> {comment.comment}</p>
-            </div>
-          ))
+          renderComments(0)
         )}
         <form onSubmit={handleSubmit} className="mt-4">
           <textarea
