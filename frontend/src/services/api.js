@@ -12,8 +12,8 @@ const API_DELETE_USER = "http://localhost:3001/delete-user-account";
 const API_BRANDS_NAME = "http://localhost:3001/get-brands";
 const API_PRODUCTS_NAME = "http://localhost:3001/get-products";
 const API_ADD_COMMENT = "http://localhost:3001/add-comment";
-const API_GET_REVIEW = `http://localhost:3001/review`; 
-const API_GET_COMMENTS = `http://localhost:3001/comments`; 
+const API_GET_REVIEW = "http://localhost:3001/review"; 
+const API_GET_COMMENTS = "http://localhost:3001/comments"; 
 
 export const registerUser = async (userData) => {
   return axios.post(API_REGISTER, userData);
@@ -97,7 +97,6 @@ export const addComment = async (commentData) => {
     }
   });
 };
-
 
 export const getReview = async (reviewId) => {
   return axios.get(`${API_GET_REVIEW}/${reviewId}`);

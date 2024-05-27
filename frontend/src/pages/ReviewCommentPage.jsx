@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getReview, getComments, addComment } from '../services/api';
 
@@ -9,14 +9,14 @@ const ReviewCommentPage = () => {
   const [comment, setComment] = useState('');
 
   useEffect(() => {
-    // Değerlendirme detayları
+    // Değerlendirme detaylarını çek
     getReview(reviewId).then((response) => {
       setReview(response.data);
     }).catch((error) => {
       console.error('Error fetching review:', error);
     });
 
-    // Yorumlar
+    // Yorumları çek
     getComments(reviewId).then((response) => {
       setComments(response.data);
     }).catch((error) => {
@@ -33,7 +33,7 @@ const ReviewCommentPage = () => {
         comment,
       });
       setComment('');
-      // Yorumları yükle
+      // Yorumları tekrar yükle
       getComments(reviewId).then((response) => {
         setComments(response.data);
       }).catch((error) => {
@@ -68,7 +68,7 @@ const ReviewCommentPage = () => {
         ) : (
           comments.map((comment, index) => (
             <div key={index} className="border border-gray-300 my-2 p-2">
-              <p>{comment.comment}</p>
+              <p><strong>{comment.username}:</strong> {comment.comment}</p>
             </div>
           ))
         )}
