@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getReview, getComments, addComment } from '../services/api';
 
@@ -7,7 +7,8 @@ const ReviewCommentPage = () => {
   const [review, setReview] = useState(null);
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState('');
-  const [parentCommentId, setParentCommentId] = useState(0);
+  const [replyComment, setReplyComment] = useState('');
+  const [replyParentId, setReplyParentId] = useState(null);
 
   useEffect(() => {
     getReview(reviewId).then((response) => {
@@ -28,11 +29,10 @@ const ReviewCommentPage = () => {
     try {
       await addComment({
         rev_id: reviewId,
-        parent_id: parentCommentId,
+        parent_id: 0,
         comment,
       });
       setComment('');
-      setParentCommentId(0);
       getComments(reviewId).then((response) => {
         setComments(response.data);
       }).catch((error) => {
@@ -45,13 +45,47 @@ const ReviewCommentPage = () => {
     }
   };
 
+  const handleReplySubmit = async (e, parentId) => {
+    e.preventDefault();
+    try {
+      await addComment({
+        rev_id: reviewId,
+        parent_id: parentId,
+        comment: replyComment,
+      });
+      setReplyComment('');
+      setReplyParentId(null);
+      getComments(reviewId).then((response) => {
+        setComments(response.data);
+      }).catch((error) => {
+        console.error('Error fetching comments:', error);
+      });
+      alert('Reply added successfully!');
+    } catch (error) {
+      console.error('Error adding reply', error);
+      alert('Failed to add reply');
+    }
+  };
+
   const renderComments = (parentId) => {
     return comments
       .filter((c) => c.parent_id === parentId)
       .map((comment) => (
         <div key={comment.id} className="border border-gray-300 my-2 p-2">
           <p><strong>{comment.username}:</strong> {comment.comment}</p>
-          <button onClick={() => setParentCommentId(comment.id)} className="text-blue-500">Reply</button>
+          <button onClick={() => setReplyParentId(comment.id)} className="text-blue-500">Reply</button>
+          {replyParentId === comment.id && (
+            <form onSubmit={(e) => handleReplySubmit(e, comment.id)} className="mt-2">
+              <textarea
+                value={replyComment}
+                onChange={(e) => setReplyComment(e.target.value)}
+                placeholder="Write your reply"
+                required
+                className="w-full p-2 border border-gray-300 rounded"
+              ></textarea>
+              <button type="submit" className="mt-2 p-2 bg-blue-500 text-white rounded">Submit</button>
+            </form>
+          )}
           <div className="ml-4">
             {renderComments(comment.id)}
           </div>
