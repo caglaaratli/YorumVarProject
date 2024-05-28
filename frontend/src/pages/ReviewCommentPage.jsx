@@ -4,6 +4,7 @@ import { getReview, getComments } from '../services/api';
 import CommentForm from '../components/CommentForm';
 import CommentList from '../components/CommentList';
 import { useSelector } from 'react-redux';
+import Header from '../components/Header';
 
 const ReviewCommentPage = () => {
   const { reviewId } = useParams();
@@ -46,6 +47,8 @@ const ReviewCommentPage = () => {
   }
 
   return (
+    <div className="flex flex-col min-h-screen">
+      <Header />
     <div className="container mx-auto flex">
       <div className="w-1/3 p-4">
         <h3 className="font-bold text-lg">{review.urun_Adi}</h3>
@@ -72,6 +75,7 @@ const ReviewCommentPage = () => {
           refreshComments={refreshComments} 
         />
       </div>
+    </div>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import { getAllReviews } from '../services/api';
 import ReviewList from '../components/AllReviewForm';
 import Icon from "react-icomoon";
 import iconSet from "../assets/selection.json"; 
+import Header from '../components/Header';
 
 function AllReviewsPage() {
   const [reviews, setReviews] = useState([]);
@@ -43,6 +44,8 @@ function AllReviewsPage() {
   }
 
   return (
+    <div className="flex flex-col min-h-screen">
+      <Header />
     <div className="container mx-auto flex-col md:flex-row">
       <div className="flex justify-center items-center mt-10 mb-5">
         <div className="flex items-center bg-white rounded-full shadow-lg">
@@ -59,6 +62,7 @@ function AllReviewsPage() {
         </div>
       </div>
       <ReviewList reviews={handleSearch()} />
+    </div>
     </div>
   );
 }

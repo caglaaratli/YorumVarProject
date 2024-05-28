@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getLoginUserReviews } from '../services/api';
 import ReviewList from '../components/UserReview';
+import Header from '../components/Header';
 
 function UserReviewPage() {
   const [reviews, setReviews] = useState([]);
@@ -23,8 +24,11 @@ function UserReviewPage() {
   }
 
   return (
+    <div className="flex flex-col min-h-screen">
+      <Header />
     <div className="container mx-auto flex-col md:flex-row" >
       <ReviewList reviews={reviews} />
+    </div>
     </div>
   );
 }
