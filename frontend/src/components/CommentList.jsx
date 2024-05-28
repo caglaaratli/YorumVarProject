@@ -32,13 +32,23 @@ const CommentList = ({ comments, isAuthenticated, handleMessage, refreshComments
     }
   };
 
+  const handleReplyClick = (commentId) => {
+    if (replyParentId === commentId) {
+      setReplyParentId(null);
+      setReplyComment('');
+    } else {
+      setReplyParentId(commentId);
+      setReplyComment('');
+    }
+  };
+
   const renderComments = (parentId) => {
     return comments
       .filter((c) => c.parent_id === parentId)
       .map((comment) => (
-        <div key={comment.id} className="border border-gray-300 my-2 p-2">
+        <div key={comment.id} className="border border-gray-300 rounded-md my-2 p-2">
           <p><strong>{comment.username}:</strong> {comment.comment}</p>
-          <button onClick={() => setReplyParentId(comment.id)} className="text-blue-500">Reply</button>
+          <button onClick={() => handleReplyClick(comment.id)} className="text-blue-500">Reply</button>
           {replyParentId === comment.id && (
             <form onSubmit={(e) => handleReplySubmit(e, comment.id)} className="mt-2">
               <textarea
@@ -46,9 +56,9 @@ const CommentList = ({ comments, isAuthenticated, handleMessage, refreshComments
                 onChange={(e) => setReplyComment(e.target.value)}
                 placeholder="Write your reply"
                 required
-                className="w-full p-2 border border-gray-300 rounded"
+                className="w-full p-2 border border-gray-300 rounded-lg"
               ></textarea>
-              <button type="submit" className="mt-2 p-2 bg-blue-500 text-white rounded">Submit</button>
+              <button type="submit" className="mt-2 p-2 bg-blue-500 text-white rounded-lg">Submit</button>
             </form>
           )}
           <div className="ml-4">

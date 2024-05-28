@@ -20,7 +20,7 @@ const Header = () => {
     <header className="bg-white shadow-md py-2 sm:py-4 px-4 sm:px-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4 flex-grow pl-4 sm:pl-16">
-          <img src="/logo.png" className="h-8 sm:h-10" alt="Logo" />
+          <Link to="/"><img src="/logo.png" className="h-8 sm:h-10" alt="Logo" /></Link>
           <Link
             to="/all-reviews"
             className="text-sm text-red-400 hover:text-red-700"

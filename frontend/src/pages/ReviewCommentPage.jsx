@@ -1,4 +1,4 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getReview, getComments } from '../services/api';
 import CommentForm from '../components/CommentForm';
@@ -47,35 +47,37 @@ const ReviewCommentPage = () => {
   }
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-pastel-blue">
       <Header />
-    <div className="container mx-auto flex">
-      <div className="w-1/3 p-4">
-        <h3 className="font-bold text-lg">{review.urun_Adi}</h3>
-        <p className="font-bold">Username: {review.username}</p>
-        <p className="text-sm">Brands: {review.marka_adi}</p>
-        <p className="text-sm">Site: {review.site_adi}</p>
-        <p className="text-sm">Seller: {review.satici_isim}</p>
-        <p className="text-sm">Delivery time: {review.teslimat_suresi} day</p>
-        <p className="text-sm">Is the product original: {review.urun_orj === 1 ? 'Yes' : 'No'}</p>
+      <div className="container mx-auto flex p-4">
+        <div className="w-1/3 p-4 bg-white rounded-lg shadow-md">
+          <h3 className="font-bold text-lg">{review.urun_Adi}</h3>
+          <p className="font-bold">Username: {review.username}</p>
+          <p className="text-sm">Brands: {review.marka_adi}</p>
+          <p className="text-sm">Site: {review.site_adi}</p>
+          <p className="text-sm">Seller: {review.satici_isim}</p>
+          <p className="text-sm">Delivery time: {review.teslimat_suresi} day</p>
+          <p className="text-sm">Is the product original: {review.urun_orj === 1 ? 'Yes' : 'No'}</p>
+        </div>
+        <div className="w-2/3 p-4 bg-white rounded-lg shadow-md ml-4">
+          <h3 className="font-bold text-lg">Comments</h3>
+          {message && <p className="text-red-500">{message}</p>}
+          <CommentList 
+            comments={comments} 
+            isAuthenticated={isAuthenticated} 
+            handleMessage={handleMessage} 
+            refreshComments={refreshComments} 
+            className="rounded-lg"
+          />
+          <CommentForm 
+            reviewId={reviewId} 
+            isAuthenticated={isAuthenticated} 
+            handleMessage={handleMessage} 
+            refreshComments={refreshComments} 
+            className="mt-4"
+          />
+        </div>
       </div>
-      <div className="w-2/3 p-4">
-        <h3 className="font-bold text-lg">Comments</h3>
-        {message && <p className="text-red-500">{message}</p>}
-        <CommentList 
-          comments={comments} 
-          isAuthenticated={isAuthenticated} 
-          handleMessage={handleMessage} 
-          refreshComments={refreshComments} 
-        />
-        <CommentForm 
-          reviewId={reviewId} 
-          isAuthenticated={isAuthenticated} 
-          handleMessage={handleMessage} 
-          refreshComments={refreshComments} 
-        />
-      </div>
-    </div>
     </div>
   );
 };

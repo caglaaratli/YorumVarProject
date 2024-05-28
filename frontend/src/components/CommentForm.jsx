@@ -31,15 +31,15 @@ const CommentForm = ({ reviewId, isAuthenticated, handleMessage, refreshComments
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mt-4">
+    <form onSubmit={handleSubmit} className="mt-4 rounded-md">
       <textarea
         value={comment}
         onChange={(e) => setComment(e.target.value)}
         placeholder="Write your comment"
         required
-        className="w-full p-2 border border-gray-300 rounded"
+        className="w-full p-2 border border-gray-300 rounded-lg"
       ></textarea>
-      <button type="submit" className="mt-2 p-2 bg-blue-500 text-white rounded">Submit</button>
+      <button type="submit" className=" px-8 py-2 bg-blue-500 text-white rounded">Submit</button>
     </form>
   );
 };
