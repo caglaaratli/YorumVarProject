@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import NewReviewForm from '../components/NewReviewForm';
 import { postReview } from '../services/api';
+import Header from '../components/Header';
+import PropTypes from 'prop-types';
 
-function NewReviewPage() {
+function NewReviewPage({ useSidebar }) {
   const initialReviewState = {
     urun_adi: "",
     marka_adi: "",
@@ -86,6 +88,8 @@ function NewReviewPage() {
   };
 
   return (
+    <div className="flex flex-col min-h-screen ">
+      {useSidebar && <Header />}
     <div>
       {message && (
         <div className="text-center p-3 mb-2 bg-green-100 border border-green-400 text-green-700">
@@ -100,7 +104,12 @@ function NewReviewPage() {
         handleFileChange={handleFileChange} // Dosya değişiklik işleyicisi eklendi
       />
     </div>
+    </div>
   );
 }
+
+NewReviewPage.propTypes = {
+  useSidebar: PropTypes.bool.isRequired,
+};
 
 export default NewReviewPage;

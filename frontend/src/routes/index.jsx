@@ -16,7 +16,7 @@ const AppRoutes = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<SignUp />} />
       <Route path="/profile" element={<Profile />} />
-      <Route path="/new-review" element={<NewReview />} />
+      <Route path="/new-review" element={<NewReview useSidebar={true} />} />
       <Route path="/all-reviews" element={<AllReviewPage />} />
       <Route path="/login-user-review" element={<UserReviewPage useSidebar={true} />} />
       <Route path="/account-settings" element={<AccountSettingsPage />} />

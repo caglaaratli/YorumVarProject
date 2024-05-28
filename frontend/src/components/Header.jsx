@@ -27,11 +27,20 @@ const Header = () => {
           >
             Reviews
           </Link>
+          {isAuthenticated && (
+            <Link
+              to="/new-review"
+              className="text-sm py-0.5 px-2 rounded-md text-white bg-red-400 hover:bg-red-600 hover:text-white ml-4"
+            >
+              + Add Review
+            </Link>
+          )}
         </div>
 
         <div className="relative flex items-center space-x-2 sm:space-x-4 pr-4 sm:pr-16">
           {isAuthenticated ? (
             <>
+              <span className="text-md text-gray-700">{user.name}</span>
               <FaUserCircle
                 className="text-2xl cursor-pointer"
                 onClick={() => setIsAccordionOpen(!isAccordionOpen)}
