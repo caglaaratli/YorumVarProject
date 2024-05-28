@@ -5,6 +5,9 @@ export default {
       colors: {
         "pastel-blue": "#A7C7E7",
       },
+      backgroundImage: {
+        'logo-pattern': "url('/logo.png')", 
+      },
     },
   },
   plugins: [],
