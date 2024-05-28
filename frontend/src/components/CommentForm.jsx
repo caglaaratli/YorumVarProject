@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { addComment } from '../services/api';
 
@@ -39,7 +39,7 @@ const CommentForm = ({ reviewId, isAuthenticated, handleMessage, refreshComments
         required
         className="w-full p-2 border border-gray-300 rounded-lg"
       ></textarea>
-      <button type="submit" className=" px-8 py-2 bg-blue-500 text-white rounded">Submit</button>
+      <button type="submit" className="px-8 py-2 bg-blue-500 text-white rounded">Submit</button>
     </form>
   );
 };
