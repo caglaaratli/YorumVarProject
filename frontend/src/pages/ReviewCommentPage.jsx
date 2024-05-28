@@ -81,8 +81,8 @@ const ReviewCommentPage = () => {
   return (
     <div className="flex flex-col min-h-screen bg-pastel-blue">
       <Header />
-      <div className="container mx-auto flex p-4 space-x-4">
-        <div className="w-1/3 p-4 bg-white rounded-lg shadow-md flex flex-col items-center ">
+      <div className="container mx-auto flex flex-col md:flex-row p-4 space-y-4 md:space-y-0 md:space-x-4">
+        <div className="md:w-1/3 p-4 bg-white rounded-lg shadow-md flex flex-col items-center justify-center">
           <div className="p-4 border border-gray-300 rounded-md w-full">
             <h3 className="font-bold text-lg">{review.urun_Adi}</h3>
             <p className="font-bold">Username: {review.username}</p>
@@ -97,13 +97,13 @@ const ReviewCommentPage = () => {
               <img
                 src={`http://localhost:3001/${review.photo_url}`}
                 alt="Review Photo"
-                className="w-40 h-40 object-cover rounded-md cursor-pointer"
+                className="w-32 h-32 object-cover rounded-md cursor-pointer"
                 onClick={() => handleImageClick(`http://localhost:3001/${review.photo_url}`)}
               />
             </div>
           )}
         </div>
-        <div className="w-2/3 p-4 bg-white rounded-lg shadow-md">
+        <div className="md:w-2/3 p-4 bg-white rounded-lg shadow-md">
           <h3 className="font-bold text-lg">Comments</h3>
           {message && <p className="text-red-500">{message}</p>}
           <CommentList 
