@@ -27,7 +27,7 @@ router.get("/", verifyToken, (req, res) => {
   const user_id = req.user.userId; // JWT'den alınan user_id
 
   const query =
-    "SELECT username, urun_Adi ,marka_adi, site_adi , satici_isim , teslimat_suresi , kargo_paket_puani , teslimat_puani , fiyat_puani , urun_kalite_puani , musteri_hizmetleri_puani , urun_orj , yorum FROM reviews WHERE user_id = ?";
+    "SELECT username, urun_Adi ,marka_adi, site_adi , satici_isim , teslimat_suresi , kargo_paket_puani , teslimat_puani , fiyat_puani , urun_kalite_puani , musteri_hizmetleri_puani , urun_orj , yorum, photo_url FROM reviews WHERE user_id = ?";
 
   db.query(query, [user_id], (err, results) => {
     if (err) {

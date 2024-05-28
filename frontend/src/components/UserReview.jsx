@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 
 const StarRating = ({ count }) => {
   return (
@@ -24,10 +25,20 @@ OriginalityText.propTypes = {
   isOriginal: PropTypes.number.isRequired
 };
 
-function ReviewList({ reviews }) {
+const ReviewList = ({ reviews }) => {
+  const [selectedImage, setSelectedImage] = useState(null);
+
   if (reviews.length === 0) {
     return <p>No user reviews found.</p>;
   }
+
+  const handleImageClick = (imageUrl) => {
+    setSelectedImage(imageUrl);
+  };
+
+  const handleCloseImage = () => {
+    setSelectedImage(null);
+  };
 
   return (
     <div>
@@ -35,7 +46,7 @@ function ReviewList({ reviews }) {
         <div key={index} className="border border-gray-300 m-2 p-2">
           <h3 className="font-bold">{review.urun_Adi}</h3>
           <div className="flex justify-between">
-          <p className="text-sm">Brands: {review.marka_adi}</p>
+            <p className="text-sm">Brands: {review.marka_adi}</p>
             <p className="text-sm">Site: {review.site_adi}</p>
             <p className="text-sm">Seller: {review.satici_isim}</p>
             <p className="text-sm">Delivery time: {review.teslimat_suresi} day</p>
@@ -49,11 +60,26 @@ function ReviewList({ reviews }) {
             <div><p className="text-xs">Customer Service:</p><StarRating count={review.musteri_hizmetleri_puani} /></div>
           </div>
           <p className="mt-2 text-xs">Comment: {review.yorum}</p>
+          {review.photo_url && (
+            <div className="mt-2">
+              <img
+                src={`http://localhost:3001/${review.photo_url}`} 
+                alt="Review Photo"
+                className="w-20 h-20 object-cover cursor-pointer"
+                onClick={() => handleImageClick(`http://localhost:3001/${review.photo_url}`)} 
+              />
+            </div>
+          )}
         </div>
       ))}
+      {selectedImage && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50" onClick={handleCloseImage}>
+          <img src={selectedImage} alt="Selected Review Photo" className="max-w-full max-h-full" />
+        </div>
+      )}
     </div>
   );
-}
+};
 
 ReviewList.propTypes = {
   reviews: PropTypes.array.isRequired

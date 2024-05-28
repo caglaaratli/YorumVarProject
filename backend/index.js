@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const path = require('path'); 
 const registerRouter = require("./register");
 const loginRouter = require("./login");
 const profileRouter = require("./profile");
@@ -28,6 +29,8 @@ const app = express();
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use("/register", registerRouter);
 app.use("/login", loginRouter);

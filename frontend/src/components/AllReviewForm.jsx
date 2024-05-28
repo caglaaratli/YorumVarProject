@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 const StarRating = ({ count }) => {
   return (
@@ -26,9 +27,19 @@ OriginalityText.propTypes = {
 };
 
 function ReviewList({ reviews }) {
+  const [selectedImage, setSelectedImage] = useState(null);
+
   if (reviews.length === 0) {
     return <p>No user reviews found.</p>;
   }
+
+  const handleImageClick = (imageUrl) => {
+    setSelectedImage(imageUrl);
+  };
+
+  const handleCloseImage = () => {
+    setSelectedImage(null);
+  };
 
   return (
     <div>
@@ -51,9 +62,24 @@ function ReviewList({ reviews }) {
             <div><p className="text-xs">Customer Service:</p><StarRating count={review.musteri_hizmetleri_puani} /></div>
           </div>
           <p className="mt-4 text-sm">Comment: {review.yorum}</p>
+          {review.photo_url && (
+            <div className="mt-2">
+              <img
+                src={`http://localhost:3001/${review.photo_url}`}
+                alt="Review Photo"
+                className="w-20 h-20 object-cover cursor-pointer"
+                onClick={() => handleImageClick(`http://localhost:3001/${review.photo_url}`)}
+              />
+            </div>
+          )}
           <Link to={`/review/${review.id}`} className="text-blue-500">View Comments</Link> 
         </div>
       ))}
+      {selectedImage && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50" onClick={handleCloseImage}>
+          <img src={selectedImage} alt="Selected Review Photo" className="max-w-full max-h-full" />
+        </div>
+      )}
     </div>
   );
 }
