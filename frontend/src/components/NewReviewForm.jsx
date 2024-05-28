@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { getBrands, getProducts } from "../services/api"; 
 import { useState, useEffect } from "react";
 
-function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
+function NewReviewForm({ review, handleChange, handleSubmit, renderStars, handleFileChange }) {
   const [brands, setBrands] = useState([]);
   const [products, setProducts] = useState([]); 
   const [selectedBrand, setSelectedBrand] = useState(review.marka_adi);
@@ -93,6 +93,7 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
           borderRadius: "8px",
           backgroundColor: "#fff",
         }}
+        encType="multipart/form-data" // Formun dosya yüklemeyi desteklemesi için eklenir
       >
         <div
           className="form-container"
@@ -115,20 +116,20 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
                 boxShadow: "inset 0 1px 3px rgba(0,0,0,0.1)",
               }}
             >
-              <option value="">Ürün Seçin</option>
+              <option value="">Select product</option>
               {products.map((product, index) => (
                 <option key={index} value={product.product_name}>
                   {product.product_name}
                 </option>
               ))}
-              <option value="custom">Yeni Ürün Ekle</option>
+              <option value="custom">Add New Product</option>
             </select>
           </div>
 
           {isCustomProduct && (
             <div className="form-group" style={{ display: "flex", alignItems: "center" }}>
               <label htmlFor="customProduct" style={{ flex: "1" }}>
-                Yeni Ürün Adı:
+                New Product name:
               </label>
               <input
                 id="customProduct"
@@ -164,20 +165,20 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
                 boxShadow: "inset 0 1px 3px rgba(0,0,0,0.1)",
               }}
             >
-              <option value="">Marka Seçin</option>
+              <option value="">Seelect Brand</option>
               {brands.map((brand, index) => (
                 <option key={index} value={brand.brand_name}>
                   {brand.brand_name}
                 </option>
               ))}
-              <option value="custom">Yeni Marka Ekle</option>
+              <option value="custom">Add New Brand</option>
             </select>
           </div>
 
           {isCustomBrand && (
             <div className="form-group" style={{ display: "flex", alignItems: "center" }}>
               <label htmlFor="customBrand" style={{ flex: "1" }}>
-                Yeni Marka Adı:
+                New Brand Name:
               </label>
               <input
                 id="customBrand"
@@ -311,7 +312,7 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
                 checked={review.urun_orj === "1"}
                 onChange={handleChange}
               />
-              <label htmlFor="urun_orj_yes">Evet</label>
+              <label htmlFor="urun_orj_yes">Yes</label>
               <input
                 type="radio"
                 id="urun_orj_no"
@@ -320,8 +321,27 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars }) {
                 checked={review.urun_orj === "0"}
                 onChange={handleChange}
               />
-              <label htmlFor="urun_orj_no">Hayır</label>
+              <label htmlFor="urun_orj_no">No</label>
             </div>
+          </div>
+
+          <div className="form-group" style={{ display: "flex", alignItems: "center" }}>
+            <label htmlFor="photo" style={{ flex: "1" }}>
+              Photo:
+            </label>
+            <input
+              type="file"
+              id="photo"
+              name="photo"
+              onChange={handleFileChange}
+              style={{
+                flex: "2",
+                padding: "10px",
+                borderRadius: "4px",
+                border: "1px solid #ddd",
+                boxShadow: "inset 0 1px 3px rgba(0,0,0,0.1)",
+              }}
+            />
           </div>
 
           <div className="form-group" style={{ display: "flex", alignItems: "center" }}>
@@ -370,6 +390,7 @@ NewReviewForm.propTypes = {
   handleChange: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   renderStars: PropTypes.func.isRequired,
+  handleFileChange: PropTypes.func.isRequired,
 };
 
 export default NewReviewForm;

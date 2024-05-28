@@ -36,7 +36,7 @@ export const postReview = async (reviewData) => {
   const token = localStorage.getItem('token');
   return axios.post(API_NEW_REVIEW, reviewData, {
     headers: {
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     }
   });
 };
