@@ -72,8 +72,8 @@ function AccountPage() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100 p-4">
-      <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm">
+    <div className="flex  bg-gray-100 p-4">
+      <div className="bg-white p-6 rounded-lg shadow-lg w-full ">
         {message && (
           <div className="text-center p-3 mb-2 bg-green-100 border border-green-400 text-green-700">
             {message}

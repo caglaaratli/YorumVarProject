@@ -24,9 +24,9 @@ function AccountPage() {
   }, []);
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100 p-4">
+    <div className="flex  bg-gray-100 p-4">
       {user ? (
-        <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm">
+        <div className="bg-white p-6 rounded-lg shadow-lg w-full">
           <div className="flex items-center space-x-3 mb-4">
           <Icon iconSet={iconSet} icon="user-filled" className="h-6 w-6 text-gray-500" />
             <p className="text-gray-700 flex-1"><span className="font-medium">Name:</span> {user.name}</p>
