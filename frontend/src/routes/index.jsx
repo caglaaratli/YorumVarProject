@@ -18,7 +18,7 @@ const AppRoutes = () => {
       <Route path="/profile" element={<Profile />} />
       <Route path="/new-review" element={<NewReview />} />
       <Route path="/all-reviews" element={<AllReviewPage />} />
-      <Route path="/login-user-review" element={<UserReviewPage />} />
+      <Route path="/login-user-review" element={<UserReviewPage useSidebar={true} />} />
       <Route path="/account-settings" element={<AccountSettingsPage />} />
       <Route path="/review/:reviewId" element={<ReviewCommentPage />} /> 
     </Routes>
