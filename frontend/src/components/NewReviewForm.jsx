@@ -97,7 +97,7 @@ function NewReviewForm({ review, handleChange, handleSubmit, renderStars, handle
       >
         <div
           className="form-container"
-          style={{ display: "flex", flexDirection: "column", gap: "15px" }}
+          style={{ display: "flex", flexDirection: "column", gap: "11px" }}
         >
           <div className="form-group" style={{ display: "flex", alignItems: "center" }}>
             <label htmlFor="urun_adi" style={{ flex: "1" }}>
