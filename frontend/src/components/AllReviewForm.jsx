@@ -44,7 +44,7 @@ function ReviewList({ reviews }) {
   return (
     <div>
       {reviews.map((review, index) => (
-        <div key={index} className="border border-gray-300 my-4 p-4">
+        <div key={index} className="border border-gray-300 my-4 p-4 rounded-lg">
           <h3 className="font-bold text-lg">{review.urun_Adi}</h3>
           <div className="mt-2">
             <p className="font-bold">Username: {review.username}</p>

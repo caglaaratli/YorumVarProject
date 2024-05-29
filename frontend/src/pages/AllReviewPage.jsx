@@ -10,6 +10,7 @@ function AllReviewsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [filterBrand, setFilterBrand] = useState('');
 
   useEffect(() => {
     getAllReviews()
@@ -25,14 +26,18 @@ function AllReviewsPage() {
   }, []);
 
   const handleSearch = () => {
-    const filteredReviews = reviews.filter(review =>
-      review.urun_Adi.toLocaleLowerCase('tr-TR').includes(searchTerm.toLocaleLowerCase('tr-TR'))
+    return reviews.filter(review =>
+      review.urun_Adi.toLocaleLowerCase('tr-TR').includes(searchTerm.toLocaleLowerCase('tr-TR')) &&
+      review.site_adi.toLocaleLowerCase('tr-TR').includes(filterBrand.toLocaleLowerCase('tr-TR'))
     );
-    return filteredReviews;
   };
 
   const handleSearchChange = event => {
     setSearchTerm(event.target.value);
+  };
+
+  const handleFilterChange = event => {
+    setFilterBrand(event.target.value);
   };
 
   if (loading) {
@@ -46,23 +51,35 @@ function AllReviewsPage() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-    <div className="container mx-auto flex-col md:flex-row">
-      <div className="flex justify-center items-center mt-10 mb-5">
-        <div className="flex items-center bg-white rounded-full shadow-lg">
-          <div className="p-4">
-            <Icon iconSet={iconSet} icon="search" className="w-6 h-6" />
+      <div className="container mx-auto flex-col md:flex-row">
+        <div className="flex justify-between items-center mt-10 mb-5">
+          <div className="flex items-center bg-white rounded-full shadow-lg">
+            <div className="p-4">
+              <Icon iconSet={iconSet} icon="search" className="w-6 h-6" />
+            </div>
+            <input
+              type="text"
+              className="px-4 py-3 w-full sm:w-64 focus:outline-none rounded-full"
+              placeholder="Search product"
+              value={searchTerm}
+              onChange={handleSearchChange}
+            />
           </div>
-          <input
-            type="text"
-            className="px-4 py-3 w-full sm:w-64 focus:outline-none rounded-full"
-            placeholder="Search product"
-            value={searchTerm}
-            onChange={handleSearchChange}
-          />
+          <div className="flex items-center bg-white rounded-full shadow-lg">
+            <div className="p-4">
+              <Icon iconSet={iconSet} icon="search" className="w-6 h-6" />
+            </div>
+            <input
+              type="text"
+              className="px-4 py-3 w-full sm:w-64 focus:outline-none rounded-full"
+              placeholder="Filter by site"
+              value={filterBrand}
+              onChange={handleFilterChange}
+            />
+          </div>
         </div>
+        <ReviewList reviews={handleSearch()} />
       </div>
-      <ReviewList reviews={handleSearch()} />
-    </div>
     </div>
   );
 }
