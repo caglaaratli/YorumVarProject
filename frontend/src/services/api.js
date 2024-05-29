@@ -14,6 +14,8 @@ const API_PRODUCTS_NAME = "http://localhost:3001/get-products";
 const API_ADD_COMMENT = "http://localhost:3001/add-comment";
 const API_GET_REVIEW = "http://localhost:3001/review";
 const API_GET_COMMENTS = "http://localhost:3001/comments";
+const API_SEARCH_REVIEWS = "http://localhost:3001/search-reviews";
+
 
 export const registerUser = async (userData) => {
   return axios.post(API_REGISTER, userData);
@@ -104,4 +106,8 @@ export const getReview = async (reviewId) => {
 
 export const getComments = async (reviewId) => {
   return axios.get(`${API_GET_COMMENTS}/${reviewId}`);
+};
+
+export const searchReviews = async (productName) => {
+  return axios.get(`${API_SEARCH_REVIEWS}/${productName}`);
 };

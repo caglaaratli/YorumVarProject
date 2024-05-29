@@ -15,6 +15,7 @@ const getProductsNameRouter = require("./get-products");
 const addCommentRouter = require("./add-comment");
 const getReviewRouter = require("./get-review");
 const getCommentsRouter = require("./get-comments");
+const searchReviewsRouter = require("./search-reviews");
 
 const db = require("./db");
 const cookieParser = require("cookie-parser");
@@ -46,6 +47,7 @@ app.use("/get-products", getProductsNameRouter);
 app.use("/add-comment", addCommentRouter);
 app.use("/review", getReviewRouter);
 app.use("/comments", getCommentsRouter);
+app.use("/search-reviews", searchReviewsRouter);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

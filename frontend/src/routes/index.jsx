@@ -8,6 +8,7 @@ import AllReviewPage from '../pages/AllReviewPage';
 import UserReviewPage from '../pages/UserReviewPage';
 import AccountSettingsPage from '../pages/AccountSettingsPage';
 import ReviewCommentPage from '../pages/ReviewCommentPage'; 
+import SearchReviewsPage from '../pages/SearchReviewsPage';
 
 const AppRoutes = () => {
   return (
@@ -21,6 +22,7 @@ const AppRoutes = () => {
       <Route path="/login-user-review" element={<UserReviewPage useSidebar={true} />} />
       <Route path="/account-settings" element={<AccountSettingsPage />} />
       <Route path="/review/:reviewId" element={<ReviewCommentPage />} /> 
+      <Route path="/search-reviews/:productName" element={<SearchReviewsPage />} />
     </Routes>
   );
 };
