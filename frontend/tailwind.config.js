@@ -8,6 +8,9 @@ export default {
       backgroundImage: {
         'logo-pattern': "url('/logo.png')", 
       },
+      fontFamily: {
+        'sans': ['Roboto', 'sans-serif'],
+      },
     },
   },
   plugins: [],

@@ -22,10 +22,10 @@ const containerVariants = {
 
 function HomePage() {
   return (
-    <div className="min-h-screen relative bg-logo-pattern bg-cover bg-center flex flex-col">
+    <div className="min-h-screen relative bg-logo-pattern bg-cover bg-center flex flex-col font-sans">
       <Header />
       <div className="flex-grow bg-gray-100 bg-opacity-50">
-        <div className="flex flex-col items-center justify-center min-h-screen  z-10 mt-4">
+        <div className="flex flex-col items-center justify-center min-h-screen z-10 mt-4">
           <div className="mt-4">
             <SearchBarHome />
           </div>
