@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { loginUser as loginUserRedux } from '../redux/actions/authActions'; 
-
+import Header from '../components/Header';
 
 function Login() {
   const [message, setMessage] = useState(null);
@@ -54,6 +54,8 @@ function Login() {
   };
 
   return (
+    <div className="flex flex-col min-h-screen">
+      <Header />
     <div className="flex items-center  justify-center min-h-screen bg-blue-200">
       <div className="w-full max-w-md rounded-md p-8 space-y-8 bg-white  shadow-lg">
         <h1 className="text-2xl font-semibold text-center italic text-gray-600">
@@ -77,7 +79,7 @@ function Login() {
           </p>
         </div>
       </div>
-    </div>
+    </div></div>
   );
 }
 

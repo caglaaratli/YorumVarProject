@@ -2,6 +2,7 @@ import { useState } from "react";
 import SignUpForm from "../components/SignUpForm";
 import { registerUser } from "../services/api";
 import { useNavigate } from "react-router-dom";
+import Header from '../components/Header';
 
 function SignUp() {
   const [message, setMessage] = useState(null);
@@ -34,6 +35,8 @@ function SignUp() {
     }
   };
   return (
+    <div className="flex flex-col min-h-screen">
+      <Header /> 
     <div className="flex items-center justify-center min-h-screen bg-blue-200">
       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-md shadow-lg">
         <h1 className="text-2xl font-bold text-center italic text-gray-600">
@@ -46,6 +49,7 @@ function SignUp() {
         )}
         <SignUpForm onSubmit={handleRegistration} setMessage={setMessage} />
       </div>
+    </div> 
     </div>
   );
 }
