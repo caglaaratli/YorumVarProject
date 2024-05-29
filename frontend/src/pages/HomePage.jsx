@@ -63,7 +63,7 @@ function HomePage() {
               className="card bg-white p-4 rounded-lg shadow-md text-center col-span-2 w-1/2 mx-auto mt-4"
               variants={cardVariants}
             >
-              <h2 className="text-md font-light">Sende ürün değerlendirmek istiyorsan şimdi <Link to="/login">giriş yap!</Link></h2>
+              <h2 className="text-md font-light">Sende ürün değerlendirmek istiyorsan şimdi <Link to="/login"><b>giriş yap!</b></Link></h2>
             </motion.div>
           </motion.div>
         </div>
