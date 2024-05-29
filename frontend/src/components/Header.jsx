@@ -40,7 +40,7 @@ const Header = () => {
         <div className="relative flex items-center space-x-2 sm:space-x-4 pr-4 sm:pr-16">
           {isAuthenticated ? (
             <>
-              <span className="text-md text-gray-700">{user.name}</span>
+              <span className="text-md text-gray-700"><Link to="/profile">{user.name}</Link></span>
               <FaUserCircle
                 className="text-2xl cursor-pointer"
                 onClick={() => setIsAccordionOpen(!isAccordionOpen)}
