@@ -25,12 +25,12 @@ function HomePage() {
     <div className="min-h-screen relative bg-logo-pattern bg-cover bg-center flex flex-col font-sans">
       <Header />
       <div className="flex-grow bg-gray-100 bg-opacity-50">
-        <div className="flex flex-col items-center justify-center min-h-screen z-10 mt-4">
-          <div className="mt-4">
+        <div className="flex flex-col items-center justify-center min-h-screen z-10 mt-2">
+          <div className="mt-2">
             <SearchBarHome />
           </div>
           <motion.div 
-            className="grid grid-cols-1 gap-7 mt-4 max-w-6xl w-full"
+            className="grid grid-cols-1 gap-7 mt-2 max-w-6xl w-full"
             initial="hidden"
             animate="visible"
             variants={containerVariants}
@@ -60,7 +60,7 @@ function HomePage() {
               </motion.div>
             </div>
             <motion.div 
-              className="card bg-white p-4 rounded-lg shadow-md text-center col-span-2 w-1/2 mx-auto mt-4"
+              className="card bg-white p-4 rounded-lg shadow-md text-center col-span-2 w-1/2 mx-auto mt-2"
               variants={cardVariants}
             >
               <h2 className="text-md font-light">Sende ürün değerlendirmek istiyorsan şimdi <Link to="/login"><b>giriş yap!</b></Link></h2>
