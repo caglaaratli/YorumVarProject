@@ -35,9 +35,9 @@ function SignUp() {
     }
   };
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col bg-logo-pattern bg-cover bg-center   min-h-screen">
       <Header /> 
-    <div className="flex items-center justify-center min-h-screen bg-blue-200">
+    <div className="flex items-center justify-center min-h-screen ">
       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-md shadow-lg">
         <h1 className="text-2xl font-bold text-center italic text-gray-600">
           Sign Up

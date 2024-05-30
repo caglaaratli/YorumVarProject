@@ -79,7 +79,7 @@ const ReviewCommentPage = () => {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-pastel-blue">
+    <div className="flex flex-col min-h-screen bg-logo-pattern bg-cover bg-center ">
       <Header />
       <div className="container mx-auto flex flex-col md:flex-row p-4 space-y-4 md:space-y-0 md:space-x-4">
         <div className="md:w-1/3 p-4 bg-white rounded-lg shadow-md flex flex-col items-center justify-center">

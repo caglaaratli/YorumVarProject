@@ -54,9 +54,9 @@ function Login() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex bg-logo-pattern bg-cover bg-center flex-col min-h-screen">
       <Header />
-    <div className="flex items-center  justify-center min-h-screen bg-blue-200">
+    <div className="flex items-center  justify-center min-h-screen ">
       <div className="w-full max-w-md rounded-md p-8 space-y-8 bg-white  shadow-lg">
         <h1 className="text-2xl font-semibold text-center italic text-gray-600">
           Welcome
