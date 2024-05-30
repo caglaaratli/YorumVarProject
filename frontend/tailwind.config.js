@@ -6,7 +6,7 @@ export default {
         "pastel-blue": "#A7C7E7",
       },
       backgroundImage: {
-        'logo-pattern': "url('/logo.png')", 
+        'logo-pattern': "url('/caglabg.webp')", 
       },
       fontFamily: {
         'sans': ['Roboto', 'sans-serif'],
